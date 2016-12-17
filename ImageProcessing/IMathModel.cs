@@ -2,7 +2,8 @@
 
 namespace ImageProcessingModel {
     public interface IMathModel {
-        bool setSourceImage(Bitmap bitMap);
 
+        bool setSourceImage(Bitmap bitMap);
+        Bitmap getResultImage();
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Drawing;
 
 namespace ImageProcessingForm {
     public interface IView {
         event EventHandler<BitmapEventArgs> imageSelected;
+        event EventHandler resultImageRequest;
 
+        void error(string message);
+        void setResultImage(Bitmap image);
     }
 }

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Media;
 
 namespace ImageProcessingForm {
     public partial class View : Form, IView {
@@ -14,18 +15,35 @@ namespace ImageProcessingForm {
         }
         #region IView implementaion 
         public event EventHandler<BitmapEventArgs> imageSelected;
+        public event EventHandler resultImageRequest;
 
+        public void setResultImage(Bitmap image) {
+            if(resultImage != null) {
+                resultImage.Image = image;
+                resultImage.Invalidate();
+            }
+        }
+        public void error(string message) {
+            errorMessage.Text = message;
+        }
         #endregion
 
         #region Events creation
         private void selectImage_Click(object sender, EventArgs e) {
             var eventHandler = imageSelected;
             if(eventHandler != null) {
-                if(pictureBox1 != null) {
-                    var args = new BitmapEventArgs(createBitmap(pictureBox1));
+                if(sourceImage != null) {
+                    var args = new BitmapEventArgs(createBitmap(sourceImage));
                     eventHandler(sender, args);
                 }
             }
+        }
+        private void getResultImage_Click(object sender, EventArgs e) {
+            resultImageRequest?.Invoke(sender, e);
+        }
+        private void errorLabel_Click(object sender, EventArgs e) {
+            SystemSounds.Asterisk.Play();
+            clearError();
         }
         #endregion
 
@@ -47,6 +65,15 @@ namespace ImageProcessingForm {
             }
             return image;
         }
+        private void clearError() {
+            if(errorMessage != null) {
+                errorMessage.Text = "";
+            }
+        }
         #endregion
+
+        private void View_Load(object sender, EventArgs e) {
+
+        }
     }
 }

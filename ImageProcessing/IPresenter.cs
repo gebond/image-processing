@@ -1,4 +1,5 @@
 ﻿using ImageProcessingForm;
+using System;
 
 namespace ImageProcessingModel {
     public interface IPresenter {
@@ -6,5 +7,6 @@ namespace ImageProcessingModel {
         void process();
 
         void onImageSelected(object sender, BitmapEventArgs args);
+        void onResultImageRequest(object sender, EventArgs args);
     }
 }

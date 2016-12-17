@@ -5,6 +5,14 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing_v1", "ImageProcessing_v1.csproj", "{76744E45-0B58-42F1-8A5A-961671376206}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessingModel", "ImageProcessing\ImageProcessingModel.csproj", "{4BD32816-287B-4F08-B635-43A34DA97891}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathFunctionModule", "MathFunctionModule\MathFunctionModule.csproj", "{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinearAlgebra", "..\..\projects\LinearAlgebra\LinearAlgebra\LinearAlgebra.csproj", "{9A3DB9BB-482A-4008-8370-7A00A85B64E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessingForm", "ImageProcessingForm\ImageProcessingForm.csproj", "{FD4419A0-E3BC-4E12-981D-CE338377A700}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{76744E45-0B58-42F1-8A5A-961671376206}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76744E45-0B58-42F1-8A5A-961671376206}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76744E45-0B58-42F1-8A5A-961671376206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BD32816-287B-4F08-B635-43A34DA97891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BD32816-287B-4F08-B635-43A34DA97891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BD32816-287B-4F08-B635-43A34DA97891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BD32816-287B-4F08-B635-43A34DA97891}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A3DB9BB-482A-4008-8370-7A00A85B64E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A3DB9BB-482A-4008-8370-7A00A85B64E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A3DB9BB-482A-4008-8370-7A00A85B64E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A3DB9BB-482A-4008-8370-7A00A85B64E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4419A0-E3BC-4E12-981D-CE338377A700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4419A0-E3BC-4E12-981D-CE338377A700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4419A0-E3BC-4E12-981D-CE338377A700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4419A0-E3BC-4E12-981D-CE338377A700}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

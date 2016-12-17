@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{76744E45-0B58-42F1-8A5A-961671376206}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{4BD32816-287B-4F08-B635-43A34DA97891}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageProcessing_v1</RootNamespace>
-    <AssemblyName>ImageProcessing_v1</AssemblyName>
+    <RootNamespace>ImageProcessingModel</RootNamespace>
+    <AssemblyName>ImageProcessingModel</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,7 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,17 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="IMathModel.cs" />
+    <Compile Include="IPresenter.cs" />
+    <Compile Include="MathModel.cs" />
+    <Compile Include="Presenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="ImageProcessingForm\ImageProcessingForm.csproj">
+    <ProjectReference Include="..\..\..\projects\LinearAlgebra\LinearAlgebra\LinearAlgebra.csproj">
+      <Project>{9a3db9bb-482a-4008-8370-7a00a85b64e2}</Project>
+      <Name>LinearAlgebra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageProcessingForm\ImageProcessingForm.csproj">
       <Project>{fd4419a0-e3bc-4e12-981d-ce338377a700}</Project>
       <Name>ImageProcessingForm</Name>
     </ProjectReference>
-    <ProjectReference Include="ImageProcessing\ImageProcessingModel.csproj">
-      <Project>{4bd32816-287b-4f08-b635-43a34da97891}</Project>
-      <Name>ImageProcessingModel</Name>
+    <ProjectReference Include="..\MathFunctionModule\MathFunctionModule.csproj">
+      <Project>{effa9fab-eb8d-4074-8df0-d6e301d61926}</Project>
+      <Name>MathFunctionModule</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

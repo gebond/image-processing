@@ -13,12 +13,40 @@ namespace ImageProcessingForm {
             InitializeComponent();
         }
         #region IView implementaion 
-        public event EventHandler imageSelected;
+        public event EventHandler<BitmapEventArgs> imageSelected;
 
         #endregion
 
-        private void button1_Click(object sender, EventArgs e) {
-
+        #region Events creation
+        private void selectImage_Click(object sender, EventArgs e) {
+            var eventHandler = imageSelected;
+            if(eventHandler != null) {
+                if(pictureBox1 != null) {
+                    var args = new BitmapEventArgs(createBitmap(pictureBox1));
+                    eventHandler(sender, args);
+                }
+            }
         }
+        #endregion
+
+        #region private methods
+        private Bitmap createBitmap(PictureBox pictureBox) {
+            Bitmap image = null;
+            openFileDialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*"; //формат загружаемого файла
+            if(openFileDialog.ShowDialog() == DialogResult.OK) //если в окне была нажата кнопка "ОК"
+            {
+                try {
+                    image = new Bitmap(openFileDialog.FileName);
+                    pictureBox.Image = image;
+                    pictureBox.Invalidate();
+                }
+                catch {
+                    DialogResult result = MessageBox.Show("Невозможно открыть выбранный файл",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            return image;
+        }
+        #endregion
     }
 }

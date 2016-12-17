@@ -5,11 +5,11 @@ using System.Text;
 using ImageProcessingForm;
 
 namespace ImageProcessingModel {
-    public class Presenter : IPresenter {
+    public class Presenter : IPresenter, IDisposable {
 
         public Presenter() {
             model = new MathModel();
-            Console.WriteLine("Presenter was initialized successfully");
+            Console.WriteLine("[Presenter] was initialized successfully");
         }
 
         #region IModel implemenation
@@ -17,9 +17,25 @@ namespace ImageProcessingModel {
             if(view != null) {
                 this.view = view;
             }
+            view.imageSelected += onImageSelected;
+            Console.WriteLine("[View] was initialized - all events are handled");
         }
 
         public void process() {
+        }
+
+        public void onImageSelected(object sender, BitmapEventArgs args) {
+            var image = args.Bitmap;
+            if(image != null && model.setSourceImage(image)) {
+                Console.WriteLine("[Presenter] image was send");
+            }
+            else { Console.WriteLine("[Presenter] image was incorrect - skip"); }
+        }
+
+        public void Dispose() {
+            if(view != null) {
+                view.imageSelected += onImageSelected;
+            }
         }
         #endregion
 

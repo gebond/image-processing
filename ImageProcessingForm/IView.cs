@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ImageProcessingForm {
     public interface IView {
-        event EventHandler<> imageSelected;
+        event EventHandler<BitmapEventArgs> imageSelected;
 
     }
 }

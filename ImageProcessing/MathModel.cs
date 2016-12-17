@@ -8,17 +8,24 @@ namespace ImageProcessingModel {
     class MathModel : IMathModel {
 
         public MathModel() {
-            Console.WriteLine("Model was initialized successfully");
+            Console.WriteLine("\t[Model] was initialized successfully");
         }
 
         #region IModel implemenation
         public bool setSourceImage(Bitmap bitMap) {
-            throw new NotImplementedException();
+            if(bitMap != null) {
+                sourceImage = bitMap;
+                Console.WriteLine("[Model] source image was set");
+                return true;
+            }
+            else {
+                return false;
+            }
         }
         #endregion
 
         #region privateFields
-        
+        Bitmap sourceImage;
         #endregion
 
         #region privateMethods

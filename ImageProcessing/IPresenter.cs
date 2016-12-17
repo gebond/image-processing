@@ -5,5 +5,6 @@ namespace ImageProcessingModel {
         void initView(IView view);
         void process();
 
+        void onImageSelected(object sender, BitmapEventArgs args);
     }
 }

@@ -10,7 +10,7 @@ namespace ImageProcessingForm {
                 this.bitmap = bitmap;
             }
             else {
-                throw new ArgumentNullException("bimap = null");
+                throw new ArgumentNullException("bitmap = null");
             }
         }
 

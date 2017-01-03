@@ -29,7 +29,6 @@ namespace ImageProcessingModel {
                 return resultImage;
             }
             else { return null; }
-
         }
         #endregion
 
@@ -40,18 +39,32 @@ namespace ImageProcessingModel {
 
         #region privateMethods
         private bool processImage() {
+            if(sourceImage == null) {
+                return false;
+            }
             resultImage = new Bitmap(sourceImage);
             int width = resultImage.Width;
             int height = resultImage.Height;
-            Color newColor = Color.Red;
+            var res = getColorElements(8);
+            for(int i = 0; i < 8; i++) {
+                for(int j = 0; j < 8; j++) {
+
+                }
+            }
+            /*Color newColor = Color.Red;
             for(int x = 0; x < width; x++) {
                 for(int y = 0; y < height; y++) {
                     Color oldColor = resultImage.GetPixel(x, y);
                     if(oldColor.R <= 100)
                         resultImage.SetPixel(x, y, newColor);
                 }
-            }
+            }*/
             return true;
+        }
+
+        // returns array of Elements which contained by sourceImage 
+        private ColorElement[,] getColorElements(int amountInRow) {
+            
         }
         #endregion
     }

@@ -6,43 +6,70 @@ using System.Text;
 
 namespace ImageProcessingModel {
     class ColorElements {
-        private ColorElement[,] elements;
-        private int rowCount;
-        private int colCount;
 
+        #region public methods
         public ColorElements(int sizeOfElement, Bitmap sourceImage) {
             initialize(sizeOfElement, sourceImage);
         }
-
         public void initialize(int sizeOfElement, Bitmap sourceImage) {
             if(sourceImage == null) { throw new ArgumentNullException("source image must be not null!"); }
 
             int height = sourceImage.Height;
             int width = sourceImage.Width;
-            this.rowCount = height / sizeOfElement;
-            this.colCount = width / sizeOfElement;
-
-            elements = new ColorElement[rowCount, colCount];
-
+            if(height < sizeOfElement || width < sizeOfElement) {
+                throw new ArgumentException("size must be less than width and height");
+            }
+            initializeValues(sizeOfElement, width, height);
+            createElements();
+            copyPixeles(sourceImage);
+            Console.WriteLine("ColorElements were initialized Rows = {0} Cols = {1} size = {2}", rowCount, colCount, size);
+        }
+        public Bitmap buildImage() {
+            var height = rowCount * size;
+            var width = colCount * size;
+            var image = new Bitmap(width, height);
             for(int i = 0; i < height; i++) {
                 for(int j = 0; j < width; j++) {
-                    elements[i, j][i, j] = sourceImage.GetPixel(i, j);
+                    image.SetPixel(j, i, elements[i / size, j / size][i % size, j % size]);
                 }
             }
+            return image;
         }
-
-        private void createAndFillElements(int sizeOfElement) {
-            for(int i = 0; i < this.rowCount; i++) {
-                for(int j = 0; j < this.colCount; j++) {
-                    elements[i, j] = new ColorElement(sizeOfElement);
-                }
-            }
-        }
-
         public void print() {
             foreach(var element in elements) {
                 element.print();
             }
         }
+        #endregion
+
+        #region private fields
+        private ColorElement[,] elements;
+        private int rowCount;
+        private int colCount;
+        private int size;
+        #endregion
+        #region private methods
+        private void initializeValues(int size, int width, int height) {
+            this.rowCount = height / size;
+            this.colCount = width / size;
+            this.size = size;
+            this.elements = new ColorElement[rowCount, colCount];
+        }
+        private void createElements() {
+            for(int i = 0; i < this.rowCount; i++) {
+                for(int j = 0; j < this.colCount; j++) {
+                    elements[i, j] = new ColorElement(size);
+                }
+            }
+        }
+        private void copyPixeles(Bitmap sourceImage) {
+
+            for(int i = 0; i < size * rowCount; i++) {
+                for(int j = 0; j < size * colCount; j++) {
+                    elements[i / size, j / size][i % size, j % size] = sourceImage.GetPixel(j, i);
+                }
+            }
+        }
+        #endregion
     }
 }

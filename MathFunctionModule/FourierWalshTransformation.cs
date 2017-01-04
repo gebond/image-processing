@@ -6,11 +6,11 @@ using System.Text;
 namespace MathFunctionModule {
     class FourierWalshTransformation : FourierTransformation {
 
-        public double[] doAnalysis(double[] values) {
-            if(values == null) { return null; }
-            var N = values.Length;
-            if((N != 0) && ((N & (~N + 1)) == N)) { throw new ArgumentException("N is not power of 2!"); }
-
+        public double[] doAnalysis(double[] functionValues) {
+            if(functionValues == null) { return null; }
+            var n = functionValues.Length;
+            if((n & (~n + 1)) == n) { throw new ArgumentException("len is not power of 2!"); }
+            var N = Math.Log(n, 2);
             return null;
         }
 

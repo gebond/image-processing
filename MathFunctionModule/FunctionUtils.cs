@@ -6,11 +6,22 @@ using System.Text;
 namespace MathFunctionModule {
     public static class FunctionUtils {
 
-        public static double rademacher(double x, int k);
+        #region Rademacher Function
+        public static double rademacher(double x, int k) {
+            return 0;
+        }
+        #endregion
 
+        #region Haart Function
+        public static double haart(double x, int k) {
+            return 0;
+        }
+        #endregion
 
-        public static double haart(double x, int k);
-
-        public static double walsh(double x, int k);
+        #region Walsh Function
+        public static double walsh(double x, int k) {
+            return 0;
+        }
+        #endregion
     }
 }

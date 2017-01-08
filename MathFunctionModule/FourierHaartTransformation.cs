@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace MathFunctionModule {
-    public class FourierWalshTransformation : FourierTransformation {
+    public class FourierHaartTransformation : FourierTransformation {
 
         public override double[] doAnalysis(double[] functionValues) {
             if(functionValues == null) { return null; }
@@ -35,7 +35,7 @@ namespace MathFunctionModule {
             }
             // recursive calling for both parts of input array
             calculatingValues(input.Skip(0).Take(N).ToArray()); // left part of input array
-            calculatingValues(input.Skip(N).Take(N).ToArray()); // right part
+            //calculatingValues(input.Skip(N).Take(N).ToArray()); // right part missed because of haart system
         }
     }
 }

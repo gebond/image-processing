@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="FourierTransformation.cs" />
     <Compile Include="FourierWalshTransformation.cs" />
+    <Compile Include="FourierHaartTransformation.cs" />
+    <Compile Include="FunctionUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

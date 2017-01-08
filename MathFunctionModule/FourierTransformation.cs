@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MathFunctionModule
-{
-    public interface FourierTransformation
-    {
+namespace MathFunctionModule {
+    public abstract class FourierTransformation {
         // doAnalysis returns FourierCoeffs using input values of function
-        double[] doAnalysis(double[] values);
+        public abstract double[] doAnalysis(double[] values);
         // doSynthesis returns Values of function using input values of function
-        double[] doSynthesis(double[] coeff);
+        public abstract double[] doSynthesis(double[] coeff);
+        // private method of calculation
     }
 }

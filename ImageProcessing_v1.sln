@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinearAlgebra", "..\..\proj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessingForm", "ImageProcessingForm\ImageProcessingForm.csproj", "{FD4419A0-E3BC-4E12-981D-CE338377A700}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathModuleTests", "..\MathModuleTests\MathModuleTests.csproj", "{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FD4419A0-E3BC-4E12-981D-CE338377A700}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD4419A0-E3BC-4E12-981D-CE338377A700}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD4419A0-E3BC-4E12-981D-CE338377A700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

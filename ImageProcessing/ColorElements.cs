@@ -23,7 +23,7 @@ namespace ImageProcessingModel {
             createElements();
             copyPixeles(sourceImage);
             Console.WriteLine("ColorElements were initialized Rows = {0} Cols = {1} size = {2}", rowCount, colCount, size);
-        }
+        } 
         public Bitmap buildImage() {
             var height = rowCount * size;
             var width = colCount * size;

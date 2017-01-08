@@ -54,16 +54,6 @@ namespace ImageProcessingModel {
                     case 3: { return pixeles[i, j].B; }
                     default: { throw new IndexOutOfRangeException("color is not defined"); }
                 }
-                
-            }
-            set {
-                if(i < 0 || i >= size) {
-                    throw new IndexOutOfRangeException("index i < 0 or index i >= length");
-                }
-                if(j < 0 || j >= size) {
-                    throw new IndexOutOfRangeException("index j < 0 or index j >= length");
-                }
-                pixeles[i, j] = value;
             }
         }
         public void print() {

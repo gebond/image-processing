@@ -54,6 +54,10 @@
       <Project>{4bd32816-287b-4f08-b635-43a34da97891}</Project>
       <Name>ImageProcessingModel</Name>
     </ProjectReference>
+    <ProjectReference Include="MathFunctionModule\MathFunctionModule.csproj">
+      <Project>{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}</Project>
+      <Name>MathFunctionModule</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

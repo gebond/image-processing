@@ -45,6 +45,12 @@
     <Compile Include="FunctionUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\projects\LinearAlgebra\LinearAlgebra\LinearAlgebra.csproj">
+      <Project>{9A3DB9BB-482A-4008-8370-7A00A85B64E2}</Project>
+      <Name>LinearAlgebra</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

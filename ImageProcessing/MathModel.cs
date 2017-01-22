@@ -108,8 +108,6 @@ namespace ImageProcessingModel {
         private void processElements(ColorElements elements) {
             var recalculatedElements = new List<ColorElement>();
             foreach(var element in elements.getElementsAsList()) {
-                Console.WriteLine("\t[Model] calc element:");
-                element.print();
                 recalculatedElements.Add(recalculateElement(element));
             }
             elements.replaceElements(recalculatedElements);
@@ -120,6 +118,8 @@ namespace ImageProcessingModel {
             var greens = sourceColorElement.getGColors();
             var blues = sourceColorElement.getBColors();
             ImageComressionUtils.compress(reds, this.r_percentage);
+            ImageComressionUtils.compress(greens, this.g_percentage);
+            ImageComressionUtils.compress(blues, this.b_percentage);
             Console.WriteLine("\t[Model] Reds, greens, blues matrixes was get from source Element");
             return new ColorElement(reds, greens, blues);
         }

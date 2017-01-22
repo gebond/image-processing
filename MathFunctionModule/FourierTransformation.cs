@@ -10,5 +10,16 @@ namespace MathFunctionModule {
         // doSynthesis returns Values of function using input values of function
         public abstract double[] doSynthesis(double[] coeff);
         // private method of calculation
+        
+        protected double[] createXValues(int n) {
+            if(n <= 0) {
+                throw new ArgumentException("inserted values of n must be > 0 found " + n);
+            }
+            var x_values = new double[n];
+            for(int k = 0; k < n; k++) {
+                x_values[k] = ( 2 * k + 1 ) / ( 2 * n );
+            }
+            return x_values;
+        }
     }
 }

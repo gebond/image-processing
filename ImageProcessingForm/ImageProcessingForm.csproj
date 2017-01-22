@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="BitmapEventArgs.cs" />
     <Compile Include="IView.cs" />
+    <Compile Include="NumberEventArgs.cs" />
+    <Compile Include="ParameterNumberEventArgs.cs" />
     <Compile Include="View.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +77,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ImageProcessingConstants\ImageProcessingConstants.csproj">
+      <Project>{4e8d34f1-e33c-41d8-a269-44fe67da0e23}</Project>
+      <Name>ImageProcessingConstants</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

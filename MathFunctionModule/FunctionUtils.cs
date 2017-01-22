@@ -19,6 +19,9 @@ namespace MathFunctionModule {
         }
         // r_k(x) for real x
         public static double rademacher(int k, double x) {
+            if(k < 0) {
+                throw new ArgumentException("k > 0 must be for Rademacher Function");
+            }
             return rademacher(Math.Pow(2, k) * x);
         }
         #endregion
@@ -30,16 +33,17 @@ namespace MathFunctionModule {
         #endregion
 
         #region Walsh Function
-        // w_0(x)
-        public static double walsh( double x) {
-            return 1.0;
-        }
         // w_k(x)
         public static double walsh(int n, double x) {
+            if(n < 0) {
+                throw new ArgumentException("n > 0 must be for Walsh Function");
+            }
             var result = 1.0;
-            var eps = paley(n); // get array of {1, 0} according to Paley Numbers
-            for(int k = 0; k < eps.Length; k++) {
-                result = result * Math.Pow(rademacher(k, x), eps[k]);
+            if(n != 0) {
+                var eps = paley(n); // get array of {1, 0} according to Paley Numbers
+                for(int k = 0; k < eps.Length; k++) {
+                    result = result * Math.Pow(rademacher(k, x), eps[k]);
+                }
             }
             return result;
         }
@@ -57,7 +61,6 @@ namespace MathFunctionModule {
                 // TODO fix recursion whenever, now fuck it, i'm done
                 findCoeffs(n, k, 1, result);
                 result = targetResult;
-                targetResult = null;
             }
             return result;
         }

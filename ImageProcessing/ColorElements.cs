@@ -11,19 +11,30 @@ namespace ImageProcessingModel {
         public ColorElements(int sizeOfElement, Bitmap sourceImage) {
             initialize(sizeOfElement, sourceImage);
         }
-        public void initialize(int sizeOfElement, Bitmap sourceImage) {
-            if(sourceImage == null) { throw new ArgumentNullException("source image must be not null!"); }
-
-            int height = sourceImage.Height;
-            int width = sourceImage.Width;
-            if(height < sizeOfElement || width < sizeOfElement) {
-                throw new ArgumentException("size must be less than width and height");
+        public List<ColorElement> getElementsAsList() {
+            var list = new List<ColorElement>();
+            if(elements == null) {
+                return list;
             }
-            initializeValues(sizeOfElement, width, height);
-            createElements();
-            copyPixeles(sourceImage);
-            Console.WriteLine("ColorElements were initialized Rows = {0} Cols = {1} size = {2}", rowCount, colCount, size);
-        } 
+            for(int i = 0; i < this.rowCount; i++) {
+                for(int j = 0; j < this.colCount; j++) {
+                    list.Add(elements[i, j]);
+                }
+            }
+            return list;
+        }
+        public void replaceElements(List<ColorElement> newElements) {
+            if(!(newElements.Count == rowCount * colCount)) {
+                throw new ArgumentException("input list has not enough elements");
+            }
+            for(int i = 0; i < this.rowCount; i++) {
+                for(int j = 0; j < this.colCount; j++) {
+                    elements[i, j] = newElements[i * colCount + j];
+                }
+            }
+        }
+
+
         public Bitmap buildImage() {
             var height = rowCount * size;
             var width = colCount * size;
@@ -49,6 +60,19 @@ namespace ImageProcessingModel {
         private int size;
         #endregion
         #region private methods
+        private void initialize(int sizeOfElement, Bitmap sourceImage) {
+            if(sourceImage == null) { throw new ArgumentNullException("source image must be not null!"); }
+
+            int height = sourceImage.Height;
+            int width = sourceImage.Width;
+            if(height < sizeOfElement || width < sizeOfElement) {
+                throw new ArgumentException("size must be less than width and height");
+            }
+            initializeValues(sizeOfElement, width, height);
+            createElements();
+            copyPixeles(sourceImage);
+            Console.WriteLine("ColorElements were initialized Rows = {0} Cols = {1} size = {2}", rowCount, colCount, size);
+        }
         private void initializeValues(int size, int width, int height) {
             this.rowCount = height / size;
             this.colCount = width / size;

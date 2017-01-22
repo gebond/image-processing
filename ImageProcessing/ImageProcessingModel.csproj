@@ -53,6 +53,10 @@
       <Project>{9a3db9bb-482a-4008-8370-7a00a85b64e2}</Project>
       <Name>LinearAlgebra</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ImageProcessingConstants\ImageProcessingConstants.csproj">
+      <Project>{4e8d34f1-e33c-41d8-a269-44fe67da0e23}</Project>
+      <Name>ImageProcessingConstants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ImageProcessingForm\ImageProcessingForm.csproj">
       <Project>{fd4419a0-e3bc-4e12-981d-ce338377a700}</Project>
       <Name>ImageProcessingForm</Name>

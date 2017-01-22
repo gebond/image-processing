@@ -9,14 +9,13 @@ namespace MathFunctionModule {
         public override double[] doAnalysis(double[] functionValues) {
             if(functionValues == null) { return null; }
             var len = functionValues.Length;
-            if((len & (~len + 1)) != len) { throw new ArgumentException("input len is not power of 2!"); }
-
+            if(( len & ( ~len + 1 ) ) != len) { throw new ArgumentException("input len is not power of 2!"); }
+            var fun_values = new double[len];
+            Array.Copy(functionValues, fun_values, len);
             var N = Math.Log(len, 2);
-            for(int k = 0; k < N; k++) {
-
-            }
+            calculatingValues(fun_values);
             calculatingValues(functionValues);
-            return null;
+            return fun_values;
         }
 
         public override double[] doSynthesis(double[] coeffs) {

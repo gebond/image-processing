@@ -9,18 +9,29 @@ namespace MathFunctionModule {
         public override double[] doAnalysis(double[] functionValues) {
             if(functionValues == null) { return null; }
             var len = functionValues.Length;
-            if((len & (~len + 1)) != len) { throw new ArgumentException("input len is not power of 2!"); }
-
+            if(( len & ( ~len + 1 ) ) != len) { throw new ArgumentException("input len is not power of 2!"); }
+            var fun_values = new double[len];
+            Array.Copy(functionValues, fun_values, len);
             var N = Math.Log(len, 2);
-            for(int k = 0; k < N; k++) {
-
-            }
-            calculatingValues(functionValues);
-            return null;
+            calculatingValues(fun_values);
+            return fun_values;
         }
 
         public override double[] doSynthesis(double[] coeffs) {
-            return null;
+            if(coeffs == null || coeffs.Length == 0) {
+                throw new ArgumentException("input coeffs size must be larger than 0");
+            }
+            var n = coeffs.Length;
+            var fun_values = new double[n];
+            var x = createXValues(n);
+            for(int i = 0; i < n; i++) {
+                var fun_ith = 0.0;
+                for(int j = 0; j < n; j++) {
+                    fun_ith += coeffs[i] * FunctionUtils.walsh(i, x[i]);
+                }
+                fun_values[i] = fun_ith;
+            }
+            return fun_values;
         }
 
         private void calculatingValues(double[] input) {
@@ -30,12 +41,13 @@ namespace MathFunctionModule {
             }
             int N = len / 2;
             for(int j = 0; j < N; j++) {
-                input[j] = 0.5 * (input[2 * j] + input[2 * j + 1]);
-                input[N + j] = 0.5 * (input[2 * j] - input[2 * j + 1]);
+                input[j] = 0.5 * ( input[2 * j] + input[2 * j + 1] );
+                input[N + j] = 0.5 * ( input[2 * j] - input[2 * j + 1] );
             }
             // recursive calling for both parts of input array
             calculatingValues(input.Skip(0).Take(N).ToArray()); // left part of input array
             calculatingValues(input.Skip(N).Take(N).ToArray()); // right part
         }
+
     }
 }

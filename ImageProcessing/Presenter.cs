@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ImageProcessingForm;
+using ImageProcessingConstants;
 
 namespace ImageProcessingModel {
     public class Presenter : IPresenter, IDisposable {
@@ -23,6 +24,22 @@ namespace ImageProcessingModel {
         }
 
         public void process() {
+            if(!tryGetAllParams()) {
+                return;
+            }
+            if(model.validate()) {
+                var resultImage = model.getResultImage();
+                if(resultImage != null) {
+                    view.setResultImage(resultImage);
+                }
+                else {
+                    view.error("ERROR! result image was null");
+                }
+            }
+            else {
+                Console.WriteLine();
+                view.error("ERROR! validation was not passed");
+            }
         }
         public void onImageSelected(object sender, BitmapEventArgs args) {
             var image = args.Bitmap;
@@ -32,12 +49,37 @@ namespace ImageProcessingModel {
             else { Console.WriteLine("[Presenter] image was incorrect - skip"); }
         }
         public void onResultImageRequest(object sender, EventArgs args) {
-            var resultImage = model.getResultImage();
-            if(resultImage != null) {
-                view.setResultImage(resultImage);
+            process();
+        }
+        public void onParamInserted(object sender, ParameterNumberEventArgs args) {
+            var value = args.Number;
+            var parameter = args.Parameter;
+            if(parameter.Equals(ImageConstants.RED_PERCENTAGE)) {
+                if(model.setRPercentage(value)) {
+                    Console.WriteLine("[Presenter] r_percantage is set to {0}%", value);
+                }
+                else {
+                    Console.WriteLine("[Presenter] r_percantage was not set");
+                    view.error(ImageConstants.RED_PERCENTAGE + " must be from 0 to 100!");
+                }
             }
-            else {
-                view.error("ERROR! result image was null");
+            if(parameter.Equals(ImageConstants.GREEN_PERCENTAGE)) {
+                if(model.setGPercentage(value)) {
+                    Console.WriteLine("[Presenter] g_percantage is set to {0}%", value);
+                }
+                else {
+                    Console.WriteLine("[Presenter] g_percantage was not set");
+                    view.error(ImageConstants.GREEN_PERCENTAGE + " must be from 0 to 100!");
+                }
+            }
+            if(parameter.Equals(ImageConstants.BLUE_PERCENTAGE)) {
+                if(model.setRPercentage(value)) {
+                    Console.WriteLine("[Presenter] b_percantage is set to {0}%", value);
+                }
+                else {
+                    Console.WriteLine("[Presenter] b_percantage was not set");
+                    view.error(ImageConstants.BLUE_PERCENTAGE + " must be from 0 to 100!");
+                }
             }
         }
         public void Dispose() {
@@ -45,7 +87,6 @@ namespace ImageProcessingModel {
                 view.imageSelected += onImageSelected;
             }
         }
-
         #endregion
 
         #region privateFields
@@ -54,7 +95,27 @@ namespace ImageProcessingModel {
         #endregion
 
         #region privateMethods
-
+        private bool tryGetAllParams() {
+            if(view == null) {
+                return false;
+            }
+            var R_percentage = view.getParameterValue(ImageConstants.RED_PERCENTAGE);
+            if(!model.setRPercentage(R_percentage)) {
+                view.error(ImageConstants.RED_PERCENTAGE + "is incorrect");
+                return false;
+            }
+            var G_percentage = view.getParameterValue(ImageConstants.GREEN_PERCENTAGE);
+            if(!model.setGPercentage(G_percentage)) {
+                view.error(ImageConstants.GREEN_PERCENTAGE + "is incorrect");
+                return false;
+            }
+            var B_percentage = view.getParameterValue(ImageConstants.BLUE_PERCENTAGE);
+            if(!model.setBPercentage(B_percentage)) {
+                view.error(ImageConstants.BLUE_PERCENTAGE + "is incorrect");
+                return false;
+            }
+            return true;
+        }
         #endregion
     }
 }

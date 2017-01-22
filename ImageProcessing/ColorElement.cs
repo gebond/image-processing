@@ -20,6 +20,24 @@ namespace ImageProcessingModel {
             this.size = size;
             pixeles = new Color[size, size];
         }
+        public ColorElement(int[,] red_colors, int[,] green_colors, int[,] blue_colors) {
+            if(( red_colors.GetLength(0) != red_colors.GetLength(1) ) ||
+                ( green_colors.GetLength(0) != green_colors.GetLength(1) ) ||
+                ( blue_colors.GetLength(0) != blue_colors.GetLength(1) )) {
+                throw new Exception("imposible create Element with not quadratic lens");
+            }
+            if(( red_colors.Length != green_colors.Length ) || ( green_colors.Length != blue_colors.Length )) {
+                throw new Exception("imposible create Element with R_len != G_len != B_len");
+            }
+            this.size =(int) Math.Sqrt(red_colors.Length);
+            pixeles = new Color[size, size];
+            for(int i = 0; i < size; i++) {
+                for(int j = 0; j < size; j++) {
+                    var color = Color.FromArgb(red_colors[i, j], green_colors[i, j], blue_colors[i, j]);
+                    pixeles[i, j] = color;
+                }
+            }
+        }
         public Color this[int i, int j] {
             get {
                 if(i < 0 || i >= size) {
@@ -40,6 +58,15 @@ namespace ImageProcessingModel {
                 pixeles[i, j] = value;
             }
         }
+        public int[,] getRColors() {
+            return getColor('r');
+        }
+        public int[,] getGColors() {
+            return getColor('g');
+        }
+        public int[,] getBColors() {
+            return getColor('b');
+        }
         public int this[int i, int j, int color] {
             get {
                 if(i < 0 || i >= size) {
@@ -56,6 +83,7 @@ namespace ImageProcessingModel {
                 }
             }
         }
+
         public void print() {
             Console.WriteLine("Element:");
             for(int i = 0; i < size; i++) {
@@ -67,14 +95,31 @@ namespace ImageProcessingModel {
         }
         #endregion
 
-
         #region private fields
         private Color[,] pixeles;
         private int size;
         #endregion
 
         #region private methods
-
+        private int[,] getColor(char color_symbol) {
+            var result = new int[size, size];
+            for(int i = 0; i < size; i++) {
+                for(int j = 0; j < size; j++) {
+                    switch(color_symbol) {
+                        case 'r':
+                            result[i, j] = pixeles[i, j].R;
+                            break;
+                        case 'g':
+                            result[i, j] = pixeles[i, j].G;
+                            break;
+                        case 'b':
+                            result[i, j] = pixeles[i, j].B;
+                            break;
+                    }
+                }
+            }
+            return result;
+        }
         #endregion
 
     }

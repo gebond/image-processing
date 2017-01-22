@@ -43,6 +43,7 @@
     <Compile Include="FourierWalshTransformation.cs" />
     <Compile Include="FourierHaartTransformation.cs" />
     <Compile Include="FunctionUtils.cs" />
+    <Compile Include="ImageComressionUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

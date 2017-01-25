@@ -46,6 +46,19 @@ namespace ImageProcessingForm {
             }
             throw new ArgumentException("Parameter {0} not found on view " + parameter_str);
         }
+        
+        public string getSelectedFourierMethod() {
+            var selected_index = selectedMethodBox.SelectedIndex;
+            switch(selected_index) {
+                case 0:
+                    return ImageConstants.FOURIER_BY_MATRIX;
+                case 1:
+                    return ImageConstants.FOURIER_BY_WALSH;
+                case 2:
+                    return ImageConstants.FOURIER_BY_HAART;
+            }
+            return null;
+        }
         #endregion
 
         #region Events creation
@@ -125,13 +138,13 @@ namespace ImageProcessingForm {
                 error("Percentage must be double in range 0 - 100");
             }
         }
-        #endregion
-
         private void reset_MouseClick(object sender, MouseEventArgs e) {
             this.parameter_R_percentage.Text = "100";
             this.parameter_B_percentage.Text = "100";
             this.parameter_G_percentage.Text = "100";
         }
 
+        #endregion
+        
     }
 }

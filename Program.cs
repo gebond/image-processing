@@ -14,7 +14,7 @@ namespace ImageProcessing_v1 {
 
 
             presenter.initView(view);
-            presenter.process();
+            //presenter.process();
 
 
             Application.EnableVisualStyles();

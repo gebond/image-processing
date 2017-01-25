@@ -14,5 +14,10 @@ namespace ImageProcessingModel {
         bool setRPercentage(double r_percentage);
         bool setGPercentage(double g_percentage);
         bool setBPercentage(double b_percentage);
+        bool setFourierByMatrix();
+        bool setFourierByWalsh();
+        bool setFourierByHaart();
+
+
     }
 }

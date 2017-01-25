@@ -11,5 +11,6 @@ namespace ImageProcessingForm {
         void error(string message);
         void setResultImage(Bitmap image);
         double getParameterValue(string parameter_str);
+        string getSelectedFourierMethod();
     }
 }

@@ -37,8 +37,7 @@ namespace ImageProcessingModel {
                 }
             }
             else {
-                Console.WriteLine();
-                view.error("ERROR! validation was not passed");
+                view.error("ERROR! source image was null");
             }
         }
         public void onImageSelected(object sender, BitmapEventArgs args) {
@@ -99,6 +98,17 @@ namespace ImageProcessingModel {
             if(view == null) {
                 return false;
             }
+            if(!setColorParams()) {
+                view.error("ERROR! can not get color");
+                return false;
+            }
+            if(!setSelectedMethod()) {
+                view.error("ERROR! can not get selected method");
+                return false;
+            }
+            return true;
+        }
+        bool setColorParams() {
             var R_percentage = view.getParameterValue(ImageConstants.RED_PERCENTAGE);
             if(!model.setRPercentage(R_percentage)) {
                 view.error(ImageConstants.RED_PERCENTAGE + "is incorrect");
@@ -115,6 +125,25 @@ namespace ImageProcessingModel {
                 return false;
             }
             return true;
+        } 
+        bool setSelectedMethod() {
+            var selected_method = view.getSelectedFourierMethod();
+            if(selected_method == null) {
+                return false;
+            }
+            if(selected_method.Equals(ImageConstants.FOURIER_BY_MATRIX)) {
+                model.setFourierByMatrix();
+                return true;
+            }
+            if(selected_method.Equals(ImageConstants.FOURIER_BY_WALSH)) {
+                model.setFourierByWalsh();
+                return true;
+            }
+            if(selected_method.Equals(ImageConstants.FOURIER_BY_HAART)) {
+                model.setFourierByHaart();
+                return true;
+            }
+            return false;
         }
         #endregion
     }

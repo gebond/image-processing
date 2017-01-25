@@ -35,7 +35,6 @@ namespace ImageProcessingModel {
                 return false;
             }
         }
-
         public Bitmap getResultImage() {
             if(processImage()) {
                 Console.WriteLine("\t[Model] result image was created succesfully and sent");
@@ -43,7 +42,6 @@ namespace ImageProcessingModel {
             }
             else { return null; }
         }
-
         public bool setRPercentage(double r_percentage) {
             if(validate_percentage(r_percentage)) {
                 this.r_percentage = r_percentage;
@@ -51,7 +49,6 @@ namespace ImageProcessingModel {
             }
             return false;
         }
-
         public bool setGPercentage(double g_percentage) {
             if(validate_percentage(g_percentage)) {
                 this.g_percentage = g_percentage;
@@ -59,13 +56,27 @@ namespace ImageProcessingModel {
             }
             return false;
         }
-
         public bool setBPercentage(double b_percentage) {
             if(validate_percentage(b_percentage)) {
                 this.b_percentage = b_percentage;
                 return true;
             }
             return false;
+        }
+        public bool setFourierByMatrix() {
+            selectedTransformation = new FourierWalshByMatrixTransformation();
+            Console.WriteLine("\t[Model] selected WalshByMatrix");
+            return selectedTransformation != null;
+        }
+        public bool setFourierByWalsh() {
+            selectedTransformation = new FourierWalshTransformation();
+            Console.WriteLine("\t[Model] selected Walsh");
+            return selectedTransformation != null;
+        }
+        public bool setFourierByHaart() {
+            selectedTransformation = new FourierHaartTransformation();
+            Console.WriteLine("\t[Model] selected Haart");
+            return selectedTransformation != null;
         }
         #endregion
 
@@ -77,6 +88,7 @@ namespace ImageProcessingModel {
         double r_percentage;
         double g_percentage;
         double b_percentage;
+        FourierTransformation selectedTransformation;
         #endregion
 
         #region privateMethods
@@ -117,13 +129,17 @@ namespace ImageProcessingModel {
             var reds = sourceColorElement.getRColors();
             var greens = sourceColorElement.getGColors();
             var blues = sourceColorElement.getBColors();
-            ImageComressionUtils.compress(reds, this.r_percentage);
-            ImageComressionUtils.compress(greens, this.g_percentage);
-            ImageComressionUtils.compress(blues, this.b_percentage);
+            //reds = ImageComressionUtils.compress(reds, this.r_percentage);
+            //greens = ImageComressionUtils.compress(greens, this.g_percentage);
+            //blues = ImageComressionUtils.compress(blues, this.b_percentage);
             Console.WriteLine("\t[Model] Reds, greens, blues matrixes was get from source Element");
             return new ColorElement(reds, greens, blues);
         }
 
+        private int[,] processPixelsArray(int[,] inputValues) {
+
+            return inputValues;
+        }
         #endregion
     }
 }

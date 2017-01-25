@@ -17,7 +17,7 @@ namespace MathFunctionModule {
             }
             var x_values = new double[n];
             for(int k = 0; k < n; k++) {
-                x_values[k] = ( 2 * k + 1 ) / ( 2 * n );
+                x_values[k] = ( 2.0 * k + 1.0 ) / ( 2.0 * n );
             }
             return x_values;
         }

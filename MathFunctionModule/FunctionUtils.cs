@@ -1,5 +1,4 @@
-﻿using LinearAlgebra;
-using System;
+﻿using System;
 
 namespace MathFunctionModule {
     public static class FunctionUtils {

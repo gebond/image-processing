@@ -49,10 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\projects\LinearAlgebra\LinearAlgebra\LinearAlgebra.csproj">
-      <Project>{9a3db9bb-482a-4008-8370-7a00a85b64e2}</Project>
-      <Name>LinearAlgebra</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\ImageProcessingConstants\ImageProcessingConstants.csproj">
       <Project>{4e8d34f1-e33c-41d8-a269-44fe67da0e23}</Project>
       <Name>ImageProcessingConstants</Name>

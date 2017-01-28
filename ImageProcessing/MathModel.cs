@@ -129,6 +129,9 @@ namespace ImageProcessingModel {
             var reds = sourceColorElement.getRColors();
             var greens = sourceColorElement.getGColors();
             var blues = sourceColorElement.getBColors();
+            reds = processPixelsArray(reds);
+            greens = processPixelsArray(greens);
+            blues = processPixelsArray(blues);
             //reds = ImageComressionUtils.compress(reds, this.r_percentage);
             //greens = ImageComressionUtils.compress(greens, this.g_percentage);
             //blues = ImageComressionUtils.compress(blues, this.b_percentage);
@@ -137,8 +140,32 @@ namespace ImageProcessingModel {
         }
 
         private int[,] processPixelsArray(int[,] inputValues) {
-
-            return inputValues;
+            var coeffsArray = new double[inputValues.GetLength(0), inputValues.GetLength(1)];
+            var funArray = new int[inputValues.GetLength(0), inputValues.GetLength(1)];
+            
+            for(int i = 0; i < inputValues.GetLength(0); i++) {
+                // get row 
+                var row = new double[inputValues.GetLength(1)];
+                for(int j = 0; j < inputValues.GetLength(1); j++) {
+                    row[j] = (double) inputValues[i, j];
+                }
+                // call coeffs
+                var coeffs = selectedTransformation.doAnalysis(row);
+                // call values
+                var values = selectedTransformation.doSynthesis(coeffs);
+                for(int j = 0; j < inputValues.GetLength(1); j++) {
+                    if(values[j] <= 0.0) {
+                        funArray[i, j] = 0;
+                        continue;
+                    }
+                    if(values[j] >= 255.0) {
+                        funArray[i, j] = 255;
+                        continue;
+                    }
+                    funArray[i, j] = (int)values[j];
+                }
+            }
+            return funArray;
         }
         #endregion
     }

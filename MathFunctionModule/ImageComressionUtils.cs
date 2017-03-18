@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace MathFunction {
     public static class ComressionUtils {
@@ -20,7 +18,7 @@ namespace MathFunction {
             apply_Coeff(inputValues, amount_to_delete);
             return inputValues;
         }
-        
+
         #region private methods
         private static void apply_Coeff(double[,] target, int target_amount_of_deleted) {
             if(target_amount_of_deleted == 0) {
@@ -36,17 +34,16 @@ namespace MathFunction {
                     break; // not found min value
                 }
             }
-            Console.WriteLine("Deleted {0} of {1}", amount_of_deleted, target_amount_of_deleted);
         }
         private static int find_min_value(double[,] target) {
             var min_value = Int32.MaxValue;
-            for(int i = 0; i < target.GetLength(0); i++) {
+            Parallel.For(0, target.GetLength(0), i => {
                 for(int j = 0; j < target.GetLength(1); j++) {
                     if(target[i, j] != 0 && target[i, j] < min_value) {
                         min_value = (int) target[i, j];
                     }
                 }
-            }
+            });
             return min_value;
         }
         private static bool delete_first_by_value(double[,] target, int targetValue) {
@@ -62,20 +59,20 @@ namespace MathFunction {
         }
         private static double[,] createDouble(int[,] intValues) {
             var result = new double[intValues.GetLength(0), intValues.GetLength(1)];
-            for(int i = 0; i < intValues.GetLength(0); i++) {
+            Parallel.For(0, intValues.GetLength(0), i => {
                 for(int j = 0; j < intValues.GetLength(1); j++) {
                     result[i, j] = (double) intValues[i, j];
                 }
-            }
+            });
             return result;
         }
         private static int[,] createInt(double[,] doubleValues) {
             var result = new int[doubleValues.GetLength(0), doubleValues.GetLength(1)];
-            for(int i = 0; i < doubleValues.GetLength(0); i++) {
+            Parallel.For(0, doubleValues.GetLength(0), i => {
                 for(int j = 0; j < doubleValues.GetLength(1); j++) {
                     result[i, j] = (int) doubleValues[i, j];
                 }
-            }
+            });
             return result;
         }
         #endregion

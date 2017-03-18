@@ -9,11 +9,11 @@ namespace ImageProcessingModel {
     public class Presenter : IPresenter, IDisposable {
 
         public Presenter() {
-            model = new MathModel();
+            model = new Model();
             Console.WriteLine("[Presenter] was initialized successfully");
         }
 
-        #region IModel implemenation
+        #region IPresenter implemenation
         public void initView(IView view) {
             if(view != null) {
                 this.view = view;
@@ -90,7 +90,7 @@ namespace ImageProcessingModel {
 
         #region privateFields
         IView view;
-        IMathModel model;
+        IModel model;
         #endregion
 
         #region privateMethods
@@ -98,8 +98,8 @@ namespace ImageProcessingModel {
             if(view == null) {
                 return false;
             }
-            if(!setColorParams()) {
-                view.error("ERROR! can not get color");
+            if(!setParams()) {
+                view.error("ERROR! can not get param");
                 return false;
             }
             if(!setSelectedMethod()) {
@@ -108,7 +108,7 @@ namespace ImageProcessingModel {
             }
             return true;
         }
-        bool setColorParams() {
+        bool setParams() {
             var R_percentage = view.getParameterValue(ImageConstants.RED_PERCENTAGE);
             if(!model.setRPercentage(R_percentage)) {
                 view.error(ImageConstants.RED_PERCENTAGE + "is incorrect");
@@ -122,6 +122,11 @@ namespace ImageProcessingModel {
             var B_percentage = view.getParameterValue(ImageConstants.BLUE_PERCENTAGE);
             if(!model.setBPercentage(B_percentage)) {
                 view.error(ImageConstants.BLUE_PERCENTAGE + "is incorrect");
+                return false;
+            }
+            var size = view.getParameterValue(ImageConstants.ELEMENT_SIZE);
+            if(!model.setElementSize((int)size)) {
+                view.error(ImageConstants.ELEMENT_SIZE + "is incorrect");
                 return false;
             }
             return true;

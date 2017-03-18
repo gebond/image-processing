@@ -37,8 +37,15 @@
             this.parameter_G_percentage = new System.Windows.Forms.TextBox();
             this.reset = new System.Windows.Forms.Button();
             this.selectedMethodBox = new System.Windows.Forms.ComboBox();
+            this.sizeElementBox = new System.Windows.Forms.GroupBox();
+            this.radioButton_8 = new System.Windows.Forms.RadioButton();
+            this.radioButton_16 = new System.Windows.Forms.RadioButton();
+            this.radioButton_32 = new System.Windows.Forms.RadioButton();
+            this.colorParamsBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.sourceImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resultImage)).BeginInit();
+            this.sizeElementBox.SuspendLayout();
+            this.colorParamsBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // sourceImage
@@ -97,9 +104,9 @@
             // 
             // parameter_R_percentage
             // 
-            this.parameter_R_percentage.Location = new System.Drawing.Point(457, 71);
+            this.parameter_R_percentage.Location = new System.Drawing.Point(45, 24);
             this.parameter_R_percentage.Name = "parameter_R_percentage";
-            this.parameter_R_percentage.Size = new System.Drawing.Size(32, 20);
+            this.parameter_R_percentage.Size = new System.Drawing.Size(26, 20);
             this.parameter_R_percentage.TabIndex = 5;
             this.parameter_R_percentage.Tag = "";
             this.parameter_R_percentage.Text = "100";
@@ -108,7 +115,7 @@
             // label_R_percentage
             // 
             this.label_R_percentage.AutoSize = true;
-            this.label_R_percentage.Location = new System.Drawing.Point(425, 74);
+            this.label_R_percentage.Location = new System.Drawing.Point(13, 27);
             this.label_R_percentage.Name = "label_R_percentage";
             this.label_R_percentage.Size = new System.Drawing.Size(26, 13);
             this.label_R_percentage.TabIndex = 6;
@@ -117,7 +124,7 @@
             // label_B_percentage
             // 
             this.label_B_percentage.AutoSize = true;
-            this.label_B_percentage.Location = new System.Drawing.Point(427, 122);
+            this.label_B_percentage.Location = new System.Drawing.Point(15, 75);
             this.label_B_percentage.Name = "label_B_percentage";
             this.label_B_percentage.Size = new System.Drawing.Size(25, 13);
             this.label_B_percentage.TabIndex = 8;
@@ -125,9 +132,9 @@
             // 
             // parameter_B_percentage
             // 
-            this.parameter_B_percentage.Location = new System.Drawing.Point(457, 119);
+            this.parameter_B_percentage.Location = new System.Drawing.Point(45, 72);
             this.parameter_B_percentage.Name = "parameter_B_percentage";
-            this.parameter_B_percentage.Size = new System.Drawing.Size(32, 20);
+            this.parameter_B_percentage.Size = new System.Drawing.Size(26, 20);
             this.parameter_B_percentage.TabIndex = 7;
             this.parameter_B_percentage.Text = "100";
             this.parameter_B_percentage.TextChanged += new System.EventHandler(this.parameter_B_percentage_TextChanged);
@@ -135,7 +142,7 @@
             // label_parameter_G
             // 
             this.label_parameter_G.AutoSize = true;
-            this.label_parameter_G.Location = new System.Drawing.Point(426, 170);
+            this.label_parameter_G.Location = new System.Drawing.Point(14, 123);
             this.label_parameter_G.Name = "label_parameter_G";
             this.label_parameter_G.Size = new System.Drawing.Size(26, 13);
             this.label_parameter_G.TabIndex = 10;
@@ -143,18 +150,18 @@
             // 
             // parameter_G_percentage
             // 
-            this.parameter_G_percentage.Location = new System.Drawing.Point(457, 167);
+            this.parameter_G_percentage.Location = new System.Drawing.Point(45, 120);
             this.parameter_G_percentage.Name = "parameter_G_percentage";
-            this.parameter_G_percentage.Size = new System.Drawing.Size(32, 20);
+            this.parameter_G_percentage.Size = new System.Drawing.Size(26, 20);
             this.parameter_G_percentage.TabIndex = 9;
             this.parameter_G_percentage.Text = "100";
             this.parameter_G_percentage.TextChanged += new System.EventHandler(this.parameter_G_percentage_TextChanged);
             // 
             // reset
             // 
-            this.reset.Location = new System.Drawing.Point(428, 205);
+            this.reset.Location = new System.Drawing.Point(16, 158);
             this.reset.Name = "reset";
-            this.reset.Size = new System.Drawing.Size(61, 23);
+            this.reset.Size = new System.Drawing.Size(55, 23);
             this.reset.TabIndex = 11;
             this.reset.Text = "reset";
             this.reset.UseVisualStyleBackColor = true;
@@ -167,26 +174,82 @@
             "transformation by Matrix",
             "transformation by Walsh",
             "transformation by Haart"});
-            this.selectedMethodBox.Location = new System.Drawing.Point(428, 251);
+            this.selectedMethodBox.Location = new System.Drawing.Point(405, 241);
             this.selectedMethodBox.Name = "selectedMethodBox";
-            this.selectedMethodBox.Size = new System.Drawing.Size(148, 21);
+            this.selectedMethodBox.Size = new System.Drawing.Size(193, 21);
             this.selectedMethodBox.TabIndex = 13;
             this.selectedMethodBox.Text = "select method";
+            // 
+            // sizeElementBox
+            // 
+            this.sizeElementBox.Controls.Add(this.radioButton_8);
+            this.sizeElementBox.Controls.Add(this.radioButton_16);
+            this.sizeElementBox.Controls.Add(this.radioButton_32);
+            this.sizeElementBox.Location = new System.Drawing.Point(495, 35);
+            this.sizeElementBox.Name = "sizeElementBox";
+            this.sizeElementBox.Size = new System.Drawing.Size(86, 109);
+            this.sizeElementBox.TabIndex = 15;
+            this.sizeElementBox.TabStop = false;
+            this.sizeElementBox.Text = "size of elements";
+            // 
+            // radioButton_8
+            // 
+            this.radioButton_8.AutoSize = true;
+            this.radioButton_8.Checked = true;
+            this.radioButton_8.Location = new System.Drawing.Point(20, 39);
+            this.radioButton_8.Name = "radioButton_8";
+            this.radioButton_8.Size = new System.Drawing.Size(31, 17);
+            this.radioButton_8.TabIndex = 2;
+            this.radioButton_8.TabStop = true;
+            this.radioButton_8.Text = "8";
+            this.radioButton_8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_16
+            // 
+            this.radioButton_16.AutoSize = true;
+            this.radioButton_16.Location = new System.Drawing.Point(20, 62);
+            this.radioButton_16.Name = "radioButton_16";
+            this.radioButton_16.Size = new System.Drawing.Size(37, 17);
+            this.radioButton_16.TabIndex = 1;
+            this.radioButton_16.Text = "16";
+            this.radioButton_16.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_32
+            // 
+            this.radioButton_32.AutoSize = true;
+            this.radioButton_32.Location = new System.Drawing.Point(20, 86);
+            this.radioButton_32.Name = "radioButton_32";
+            this.radioButton_32.Size = new System.Drawing.Size(37, 17);
+            this.radioButton_32.TabIndex = 0;
+            this.radioButton_32.TabStop = true;
+            this.radioButton_32.Text = "32";
+            this.radioButton_32.UseVisualStyleBackColor = true;
+            // 
+            // colorParamsBox
+            // 
+            this.colorParamsBox.Controls.Add(this.label_R_percentage);
+            this.colorParamsBox.Controls.Add(this.parameter_R_percentage);
+            this.colorParamsBox.Controls.Add(this.parameter_B_percentage);
+            this.colorParamsBox.Controls.Add(this.reset);
+            this.colorParamsBox.Controls.Add(this.label_B_percentage);
+            this.colorParamsBox.Controls.Add(this.label_parameter_G);
+            this.colorParamsBox.Controls.Add(this.parameter_G_percentage);
+            this.colorParamsBox.Location = new System.Drawing.Point(405, 35);
+            this.colorParamsBox.Name = "colorParamsBox";
+            this.colorParamsBox.Size = new System.Drawing.Size(84, 185);
+            this.colorParamsBox.TabIndex = 16;
+            this.colorParamsBox.TabStop = false;
+            this.colorParamsBox.Text = "color rate";
             // 
             // View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(997, 372);
+            this.Controls.Add(this.colorParamsBox);
+            this.Controls.Add(this.sizeElementBox);
             this.Controls.Add(this.selectedMethodBox);
-            this.Controls.Add(this.reset);
-            this.Controls.Add(this.label_parameter_G);
-            this.Controls.Add(this.parameter_G_percentage);
-            this.Controls.Add(this.label_B_percentage);
-            this.Controls.Add(this.parameter_B_percentage);
             this.Controls.Add(this.sourceImage);
-            this.Controls.Add(this.label_R_percentage);
-            this.Controls.Add(this.parameter_R_percentage);
             this.Controls.Add(this.getResultImage);
             this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.selectImage);
@@ -195,6 +258,10 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.sourceImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.resultImage)).EndInit();
+            this.sizeElementBox.ResumeLayout(false);
+            this.sizeElementBox.PerformLayout();
+            this.colorParamsBox.ResumeLayout(false);
+            this.colorParamsBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,6 +285,11 @@
         private System.Windows.Forms.TextBox parameter_G_percentage;
         private System.Windows.Forms.Button reset;
         private System.Windows.Forms.ComboBox selectedMethodBox;
+        private System.Windows.Forms.GroupBox sizeElementBox;
+        private System.Windows.Forms.RadioButton radioButton_8;
+        private System.Windows.Forms.RadioButton radioButton_16;
+        private System.Windows.Forms.RadioButton radioButton_32;
+        private System.Windows.Forms.GroupBox colorParamsBox;
     }
 }
 

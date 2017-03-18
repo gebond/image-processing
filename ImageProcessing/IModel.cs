@@ -1,10 +1,8 @@
 ﻿using System.Drawing;
 
 namespace ImageProcessingModel {
-    public interface IMathModel {
-
-
-
+    public interface IModel {
+        
         // image methods
         bool validate();
         bool setSourceImage(Bitmap bitMap);
@@ -17,7 +15,6 @@ namespace ImageProcessingModel {
         bool setFourierByMatrix();
         bool setFourierByWalsh();
         bool setFourierByHaart();
-
-
+        bool setElementSize(int elementSize);
     }
 }

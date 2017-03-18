@@ -12,10 +12,7 @@ namespace ImageProcessing_v1 {
             IPresenter presenter = new Presenter();
             var view = new ImageProcessingForm.View();
 
-
             presenter.initView(view);
-            //presenter.process();
-
 
             Application.EnableVisualStyles();
             Application.Run(view);

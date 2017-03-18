@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace ImageProcessingModel {
     class ColorElements {
@@ -24,7 +23,7 @@ namespace ImageProcessingModel {
             return list;
         }
         public void replaceElements(List<ColorElement> newElements) {
-            if(!(newElements.Count == rowCount * colCount)) {
+            if(!( newElements.Count == rowCount * colCount )) {
                 throw new ArgumentException("input list has not enough elements");
             }
             for(int i = 0; i < this.rowCount; i++) {
@@ -33,7 +32,6 @@ namespace ImageProcessingModel {
                 }
             }
         }
-
 
         public Bitmap buildImage() {
             var height = rowCount * size;
@@ -59,6 +57,7 @@ namespace ImageProcessingModel {
         private int colCount;
         private int size;
         #endregion
+
         #region private methods
         private void initialize(int sizeOfElement, Bitmap sourceImage) {
             if(sourceImage == null) { throw new ArgumentNullException("source image must be not null!"); }
@@ -80,14 +79,13 @@ namespace ImageProcessingModel {
             this.elements = new ColorElement[rowCount, colCount];
         }
         private void createElements() {
-            for(int i = 0; i < this.rowCount; i++) {
+            Parallel.For(0, rowCount, i => {
                 for(int j = 0; j < this.colCount; j++) {
                     elements[i, j] = new ColorElement(size);
                 }
-            }
+            });
         }
         private void copyPixeles(Bitmap sourceImage) {
-
             for(int i = 0; i < size * rowCount; i++) {
                 for(int j = 0; j < size * colCount; j++) {
                     elements[i / size, j / size][i % size, j % size] = sourceImage.GetPixel(j, i);

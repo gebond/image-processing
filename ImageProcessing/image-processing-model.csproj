@@ -42,9 +42,9 @@
   <ItemGroup>
     <Compile Include="ColorElement.cs" />
     <Compile Include="ColorElements.cs" />
-    <Compile Include="IMathModel.cs" />
+    <Compile Include="IModel.cs" />
     <Compile Include="IPresenter.cs" />
-    <Compile Include="MathModel.cs" />
+    <Compile Include="Model.cs" />
     <Compile Include="Presenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

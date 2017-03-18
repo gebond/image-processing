@@ -44,9 +44,12 @@ namespace ImageProcessingForm {
                 var success = Double.TryParse(parameter_B_percentage.Text, out value);
                 return ( success ) ? value : 0.0;
             }
+            if(parameter_str.Equals(ImageConstants.ELEMENT_SIZE)) {
+                return getSelectedElementSize();
+            }
             throw new ArgumentException("Parameter {0} not found on view " + parameter_str);
         }
-        
+
         public string getSelectedFourierMethod() {
             var selected_index = selectedMethodBox.SelectedIndex;
             switch(selected_index) {
@@ -144,7 +147,18 @@ namespace ImageProcessingForm {
             this.parameter_G_percentage.Text = "100";
         }
 
+        private double getSelectedElementSize() {
+            if(radioButton_8.Checked) {
+                return 8;
+            }
+            if(radioButton_16.Checked) {
+                return 16;
+            }
+            if(radioButton_32.Checked) {
+                return 32;
+            }
+            return 8;
+        }
         #endregion
-        
     }
 }

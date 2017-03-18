@@ -36,5 +36,9 @@ namespace MathFunction {
             calculatingValues(input.Skip(0).Take(N).ToArray()); // left part of input array
             //calculatingValues(input.Skip(N).Take(N).ToArray()); // right part missed because of haart system
         }
+
+        public override string ToString() {
+            return "fourier-haart-transformation";
+        }
     }
 }

@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 
 namespace ImageProcessingModel {
-    class MathModel : IMathModel {
+    class Model : IModel {
 
-        public MathModel() {
-            Console.WriteLine("\t[Model] was initialized successfully");
+        public Model() {
             init();
-            Console.WriteLine("\t[Model] params: r_p={0}% g_p={1}% b_p={2}%",
-                r_percentage, g_percentage, b_percentage);
+            Console.WriteLine("\t[Model] was initialized successfully");
+            Console.WriteLine("\t[Model] params: r_p={0}% g_p={1}% b_p={2}% selectedMetod:{3}",
+                r_percentage, g_percentage, b_percentage, selectedTransformation);
         }
 
         #region IModel implemenation
@@ -79,6 +79,14 @@ namespace ImageProcessingModel {
             Console.WriteLine("\t[Model] selected Haart");
             return selectedTransformation != null;
         }
+        public bool setElementSize(int elementSize) {
+            if(validate_size(elementSize)) {
+                this.elementSize = elementSize;
+                Console.WriteLine("\t[Model] elementSize set to {0}", elementSize);
+                return true;
+            }
+            return false;
+        }
         #endregion
 
         #region privateFields
@@ -89,6 +97,7 @@ namespace ImageProcessingModel {
         double r_percentage;
         double g_percentage;
         double b_percentage;
+        int elementSize;
         FourierTransformation selectedTransformation;
         #endregion
 
@@ -99,6 +108,7 @@ namespace ImageProcessingModel {
             r_percentage = 100.0;
             g_percentage = 100.0;
             b_percentage = 100.0;
+            selectedTransformation = null;
         }
         private bool validate_percentage(double percentage) {
             if(percentage >= 0 && percentage <= 100) {
@@ -107,11 +117,18 @@ namespace ImageProcessingModel {
             Console.WriteLine("percentage {0} is incorrect", percentage);
             return false;
         }
+        private bool validate_size(int size) {
+            if(( size & ( ~size + 1 ) ) == size) {
+                return true;
+            }
+            Console.WriteLine("size {0} is incorrect", size);
+            return false;
+        }
         private bool processImage() {
             if(sourceImage == null) {
                 return false;
             }
-            var colorElements = new ColorElements(ImageConstants.SIZE_SMALL, sourceImage);
+            var colorElements = new ColorElements(elementSize, sourceImage);
             Console.WriteLine("\t[Model] Current percentages: R-{0}% G-{1}% B-{2}%", r_percentage,
                 g_percentage, b_percentage);
             processElements(colorElements);
@@ -139,14 +156,13 @@ namespace ImageProcessingModel {
             reds = ComressionUtils.compress(reds, this.r_percentage);
             greens = ComressionUtils.compress(greens, this.g_percentage);
             blues = ComressionUtils.compress(blues, this.b_percentage);
-            Console.WriteLine("\t[Model] Reds, greens, blues matrixes was get from source Element");
             return new ColorElement(reds, greens, blues);
         }
 
         private int[,] processPixelsArray(int[,] inputValues) {
             var coeffsArray = new double[inputValues.GetLength(0), inputValues.GetLength(1)];
             var funArray = new int[inputValues.GetLength(0), inputValues.GetLength(1)];
-            
+
             for(int i = 0; i < inputValues.GetLength(0); i++) {
                 // get row 
                 var row = new double[inputValues.GetLength(1)];
@@ -166,7 +182,7 @@ namespace ImageProcessingModel {
                         funArray[i, j] = 255;
                         continue;
                     }
-                    funArray[i, j] = (int)values[j];
+                    funArray[i, j] = (int) values[j];
                 }
             }
             return funArray;

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace ImageProcessingModel {
     /*
@@ -28,14 +26,14 @@ namespace ImageProcessingModel {
             if(( red_colors.Length != green_colors.Length ) || ( green_colors.Length != blue_colors.Length )) {
                 throw new Exception("imposible create Element with R_len != G_len != B_len");
             }
-            this.size =(int) Math.Sqrt(red_colors.Length);
+            this.size = (int) Math.Sqrt(red_colors.Length);
             pixeles = new Color[size, size];
-            for(int i = 0; i < size; i++) {
+            Parallel.For(0, size, i => {
                 for(int j = 0; j < size; j++) {
                     var color = Color.FromArgb(red_colors[i, j], green_colors[i, j], blue_colors[i, j]);
                     pixeles[i, j] = color;
                 }
-            }
+            });
         }
         public Color this[int i, int j] {
             get {
@@ -102,7 +100,7 @@ namespace ImageProcessingModel {
         #region private methods
         private int[,] getColor(char color_symbol) {
             var result = new int[size, size];
-            for(int i = 0; i < size; i++) {
+            Parallel.For(0, size, i => {
                 for(int j = 0; j < size; j++) {
                     switch(color_symbol) {
                         case 'r':
@@ -116,7 +114,7 @@ namespace ImageProcessingModel {
                             break;
                     }
                 }
-            }
+            });
             return result;
         }
         #endregion

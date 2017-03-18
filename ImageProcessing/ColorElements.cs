@@ -26,11 +26,11 @@ namespace ImageProcessingModel {
             if(!( newElements.Count == rowCount * colCount )) {
                 throw new ArgumentException("input list has not enough elements");
             }
-            for(int i = 0; i < this.rowCount; i++) {
+            Parallel.For(0, this.rowCount, i => {
                 for(int j = 0; j < this.colCount; j++) {
                     elements[i, j] = newElements[i * colCount + j];
                 }
-            }
+            });
         }
 
         public Bitmap buildImage() {

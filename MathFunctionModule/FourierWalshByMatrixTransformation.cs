@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MathFunctionModule {
+namespace MathFunction {
     public class FourierWalshByMatrixTransformation : FourierTransformation {
         public override double[] doAnalysis(double[] values) {
             throw new NotImplementedException();

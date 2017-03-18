@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MathFunctionModule {
+namespace MathFunction {
     public static class FunctionUtils {
 
         #region Rademacher Function

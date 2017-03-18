@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MathFunctionModule {
+namespace MathFunction {
     public abstract class FourierTransformation {
         // doAnalysis returns FourierCoeffs using input values of function
         public abstract double[] doAnalysis(double[] values);

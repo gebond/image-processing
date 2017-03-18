@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MathFunctionModule {
+namespace MathFunction {
     public static class ComressionUtils {
         public static int[,] compress(int[,] inputValues, double compression_coeff) {
             var doubles = compress(createDouble(inputValues), compression_coeff);
@@ -20,6 +20,8 @@ namespace MathFunctionModule {
             apply_Coeff(inputValues, amount_to_delete);
             return inputValues;
         }
+        
+        #region private methods
         private static void apply_Coeff(double[,] target, int target_amount_of_deleted) {
             if(target_amount_of_deleted == 0) {
                 return; // nothing to delete
@@ -41,7 +43,7 @@ namespace MathFunctionModule {
             for(int i = 0; i < target.GetLength(0); i++) {
                 for(int j = 0; j < target.GetLength(1); j++) {
                     if(target[i, j] != 0 && target[i, j] < min_value) {
-                        min_value = (int)target[i, j];
+                        min_value = (int) target[i, j];
                     }
                 }
             }
@@ -62,7 +64,7 @@ namespace MathFunctionModule {
             var result = new double[intValues.GetLength(0), intValues.GetLength(1)];
             for(int i = 0; i < intValues.GetLength(0); i++) {
                 for(int j = 0; j < intValues.GetLength(1); j++) {
-                    result[i,j] = (double) intValues[i, j];
+                    result[i, j] = (double) intValues[i, j];
                 }
             }
             return result;
@@ -76,6 +78,7 @@ namespace MathFunctionModule {
             }
             return result;
         }
+        #endregion
 
     }
 }

@@ -1,5 +1,5 @@
 ﻿using ImageProcessingConstants;
-using MathFunctionModule;
+using MathFunction;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

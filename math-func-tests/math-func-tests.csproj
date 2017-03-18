@@ -58,7 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MathFunctionModule\math-func.csproj">
+    <ProjectReference Include="..\math-func\math-func.csproj">
       <Project>{effa9fab-eb8d-4074-8df0-d6e301d61926}</Project>
       <Name>math-func</Name>
     </ProjectReference>

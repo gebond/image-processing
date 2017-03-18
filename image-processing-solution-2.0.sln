@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "image-processing-constants"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "math-func", "math-func\math-func.csproj", "{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "math-func-tests", "math-func-tests\math-func-tests.csproj", "{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

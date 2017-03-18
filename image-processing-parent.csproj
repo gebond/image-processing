@@ -7,8 +7,8 @@
     <ProjectGuid>{76744E45-0B58-42F1-8A5A-961671376206}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageProcessing_v1</RootNamespace>
-    <AssemblyName>ImageProcessing_v1</AssemblyName>
+    <RootNamespace>ImageProcessingSolution</RootNamespace>
+    <AssemblyName>ImageProcessingSolution</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -46,17 +46,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="ImageProcessingForm\image-processing-form.csproj">
+    <ProjectReference Include="image-processing-form\image-processing-form.csproj">
       <Project>{fd4419a0-e3bc-4e12-981d-ce338377a700}</Project>
       <Name>image-processing-form</Name>
     </ProjectReference>
-    <ProjectReference Include="ImageProcessing\image-processing-model.csproj">
+    <ProjectReference Include="image-processing-model\image-processing-model.csproj">
       <Project>{4bd32816-287b-4f08-b635-43a34da97891}</Project>
       <Name>image-processing-model</Name>
-    </ProjectReference>
-    <ProjectReference Include="MathFunctionModule\math-func.csproj">
-      <Project>{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}</Project>
-      <Name>math-func</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

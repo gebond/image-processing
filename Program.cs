@@ -1,8 +1,6 @@
 ﻿using ImageProcessingModel;
-using ImageProcessingForm;
 using System;
 using System.Windows.Forms;
-using MathFunction;
 
 namespace ImageProcessing_v1 {
     class Program {

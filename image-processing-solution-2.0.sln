@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing_v1", "ImageProcessing_v1.csproj", "{76744E45-0B58-42F1-8A5A-961671376206}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "image-processing-parent", "image-processing-parent.csproj", "{76744E45-0B58-42F1-8A5A-961671376206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessingModel", "ImageProcessing\ImageProcessingModel.csproj", "{4BD32816-287B-4F08-B635-43A34DA97891}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "image-processing-model", "ImageProcessing\image-processing-model.csproj", "{4BD32816-287B-4F08-B635-43A34DA97891}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathFunctionModule", "MathFunctionModule\MathFunctionModule.csproj", "{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "math-func", "MathFunctionModule\math-func.csproj", "{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessingForm", "ImageProcessingForm\ImageProcessingForm.csproj", "{FD4419A0-E3BC-4E12-981D-CE338377A700}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "image-processing-form", "ImageProcessingForm\image-processing-form.csproj", "{FD4419A0-E3BC-4E12-981D-CE338377A700}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathModuleTests", "..\MathModuleTests\MathModuleTests.csproj", "{4FCE1E32-8FF9-449D-948D-895B3B5C23FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessingConstants", "..\ImageProcessingConstants\ImageProcessingConstants.csproj", "{4E8D34F1-E33C-41D8-A269-44FE67DA0E23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "image-processing-constants", "..\ImageProcessingConstants\image-processing-constants.csproj", "{4E8D34F1-E33C-41D8-A269-44FE67DA0E23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

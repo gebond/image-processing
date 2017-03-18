@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace MathFunctionModule {
-    public static class ImageComressionUtils {
+    public static class ComressionUtils {
         public static int[,] compress(int[,] inputValues, double compression_coeff) {
             var doubles = compress(createDouble(inputValues), compression_coeff);
             return createInt(doubles);

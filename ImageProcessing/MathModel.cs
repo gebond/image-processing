@@ -1,4 +1,5 @@
-﻿using MathFunctionModule;
+﻿using ImageProcessingConstants;
+using MathFunctionModule;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -110,7 +111,7 @@ namespace ImageProcessingModel {
             if(sourceImage == null) {
                 return false;
             }
-            var colorElements = new ColorElements(8, sourceImage);
+            var colorElements = new ColorElements(ImageConstants.SIZE_SMALL, sourceImage);
             Console.WriteLine("\t[Model] Current percentages: R-{0}% G-{1}% B-{2}%", r_percentage,
                 g_percentage, b_percentage);
             processElements(colorElements);
@@ -126,15 +127,18 @@ namespace ImageProcessingModel {
         }
 
         private ColorElement recalculateElement(ColorElement sourceColorElement) {
+            // getting all colors from Element
             var reds = sourceColorElement.getRColors();
             var greens = sourceColorElement.getGColors();
             var blues = sourceColorElement.getBColors();
+            // calculate
             reds = processPixelsArray(reds);
             greens = processPixelsArray(greens);
             blues = processPixelsArray(blues);
-            //reds = ImageComressionUtils.compress(reds, this.r_percentage);
-            //greens = ImageComressionUtils.compress(greens, this.g_percentage);
-            //blues = ImageComressionUtils.compress(blues, this.b_percentage);
+            // compress result values
+            reds = ComressionUtils.compress(reds, this.r_percentage);
+            greens = ComressionUtils.compress(greens, this.g_percentage);
+            blues = ComressionUtils.compress(blues, this.b_percentage);
             Console.WriteLine("\t[Model] Reds, greens, blues matrixes was get from source Element");
             return new ColorElement(reds, greens, blues);
         }

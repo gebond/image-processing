@@ -65,10 +65,8 @@ namespace MathFunctionModule {
         }
         private static void findCoeffs(int n, int k, int tryDigit, int[] sourceArray) {
             sourceArray[k] = tryDigit;
-            Console.WriteLine("k = {0}, digit = {1}", k, tryDigit);
             if(k < 1) {
                 if(summaWithPowOfTwo(sourceArray) == n) {
-                    Console.WriteLine("Summa found!", summaWithPowOfTwo(sourceArray));
                     targetResult = new int[sourceArray.Length];
                     Array.Copy(sourceArray, targetResult, sourceArray.Length);
                     return;

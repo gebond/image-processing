@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FD4419A0-E3BC-4E12-981D-CE338377A700}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{76744E45-0B58-42F1-8A5A-961671376206}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ImageProcessingForm</RootNamespace>
-    <AssemblyName>ImageProcessingForm</AssemblyName>
+    <RootNamespace>ImageProcessing_v1</RootNamespace>
+    <AssemblyName>ImageProcessing_v1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,54 +34,29 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitmapEventArgs.cs" />
-    <Compile Include="IView.cs" />
-    <Compile Include="NumberEventArgs.cs" />
-    <Compile Include="ParameterNumberEventArgs.cs" />
-    <Compile Include="View.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View.Designer.cs">
-      <DependentUpon>View.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="View.resx">
-      <DependentUpon>View.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ImageProcessingConstants\ImageProcessingConstants.csproj">
-      <Project>{4e8d34f1-e33c-41d8-a269-44fe67da0e23}</Project>
-      <Name>ImageProcessingConstants</Name>
+    <ProjectReference Include="ImageProcessingForm\image-processing-form.csproj">
+      <Project>{fd4419a0-e3bc-4e12-981d-ce338377a700}</Project>
+      <Name>image-processing-form</Name>
+    </ProjectReference>
+    <ProjectReference Include="ImageProcessing\image-processing-model.csproj">
+      <Project>{4bd32816-287b-4f08-b635-43a34da97891}</Project>
+      <Name>image-processing-model</Name>
+    </ProjectReference>
+    <ProjectReference Include="MathFunctionModule\math-func.csproj">
+      <Project>{EFFA9FAB-EB8D-4074-8DF0-D6E301D61926}</Project>
+      <Name>math-func</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

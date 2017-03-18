@@ -13,13 +13,11 @@ namespace MathFunction {
             var total_values = new double[len];
             Array.Copy(functionValues, total_values, len);
             var answer = new double[len];
-            if(len != 2) {
-                calculatingValues(total_values, answer, 0);
-            }
+            calculatingValues(total_values, answer, 0);
             return answer;
         }
 
-        
+
 
         public override double[] doSynthesis(double[] coeffs) {
             if(coeffs == null || coeffs.Length == 0) {
@@ -39,7 +37,7 @@ namespace MathFunction {
             return fun_values;
         }
 
-        private void calculatingValues(double[] input,double[] target, int current) {
+        private void calculatingValues(double[] input, double[] target, int current) {
             var len = input.Length;
             if(len == 1) {
                 target[current] = input[0];

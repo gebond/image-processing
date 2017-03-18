@@ -6,10 +6,14 @@ namespace MathFunction {
         #region Rademacher Function
         // r_0(x) for x: from 0 to 1
         public static double rademacher(double x) {
-            if(x < 0 || x >= 1) {
+            if(x >= 1) {
                 x = x - Math.Truncate(x);
             }
-            if(x >= 0 && x < 0.5) {
+            else if(x < 0) {
+                var delta = Math.Abs(x) - Math.Truncate(Math.Abs(x));
+                x = 1 - delta;
+            }
+            if(( x >= 0 && x < 0.5 ) || x == 1) {
                 return 1;
             }
             else {
@@ -40,8 +44,8 @@ namespace MathFunction {
             var result = 1.0;
             if(n != 0) {
                 var eps = paley(n); // get array of {1, 0} according to Paley Numbers
-                for(int k = 0; k < eps.Length; k++) {
-                    result = result * Math.Pow(rademacher(k, x), eps[k]);
+                for(int i = 0; i < eps.Length; i++) {
+                    result = result * Math.Pow(rademacher(i, x), eps[i]);
                 }
             }
             return result;
@@ -52,7 +56,7 @@ namespace MathFunction {
         // Paley is the method of getting array of coeffs for Epsilons {1, 0} for input Value n
         public static int[] paley(int n) {
             // k is number of the elder pow of epsilon
-            var k = (int)Math.Truncate(Math.Log(n, 2));
+            var k = (int) Math.Truncate(Math.Log(n, 2));
             var result = new int[k + 1];
             result[k] = 1;
             // checks if n is not power of 2

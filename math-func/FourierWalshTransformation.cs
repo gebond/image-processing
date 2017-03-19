@@ -17,8 +17,6 @@ namespace MathFunction {
             return answer;
         }
 
-
-
         public override double[] doSynthesis(double[] coeffs) {
             if(coeffs == null || coeffs.Length == 0) {
                 throw new ArgumentException("input coeffs size must be larger than 0");

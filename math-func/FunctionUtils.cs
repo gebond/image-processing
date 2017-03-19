@@ -10,8 +10,7 @@ namespace MathFunction {
                 x = x - Math.Truncate(x);
             }
             else if(x < 0) {
-                var delta = Math.Abs(x) - Math.Truncate(Math.Abs(x));
-                x = 1 - delta;
+                x = 1 - ( Math.Abs(x) - Math.Truncate(Math.Abs(x)) );
             }
             if(( x >= 0 && x < 0.5 ) || x == 1) {
                 return 1;

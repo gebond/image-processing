@@ -61,7 +61,6 @@ namespace MathFunction {
             result[k] = 1;
             // checks if n is not power of 2
             if(Math.Log(n, 2) - k != 0) {
-                // TODO fix recursion whenever, now fuck it, i'm done
                 findCoeffs(n, k, 1, result);
                 result = targetResult;
             }

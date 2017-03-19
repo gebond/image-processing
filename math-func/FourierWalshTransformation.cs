@@ -44,9 +44,11 @@ namespace MathFunction {
                 return; // exit of recursion
             }
             int N = len / 2;
+            double[] copy = new double[len];
+            Array.Copy(input, copy, len);
             for(int j = 0; j < N; j++) {
-                input[j] = 0.5 * ( input[2 * j] + input[2 * j + 1] );
-                input[N + j] = 0.5 * ( input[2 * j] - input[2 * j + 1] );
+                input[j] = 0.5 * ( copy[2 * j] + copy[2 * j + 1] );
+                input[N + j] = 0.5 * ( copy[2 * j] - copy[2 * j + 1] );
             }
             // recursive calling for both parts of input array
             calculatingValues(input.Skip(0).Take(N).ToArray(), target, current); // left part of input array

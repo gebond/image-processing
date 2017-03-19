@@ -40,9 +40,19 @@ namespace MathModuleTests {
 
         [TestMethod]
         public void walsh_transf_full() {
-            var func_values = new double[] { 1.0, 2.0};
+            var func_values = new double[] { 150.0, 250.0};
             var coeffs = transformation.doAnalysis(func_values);
             var func_values_transformed = transformation.doSynthesis(coeffs);
+            CollectionAssert.AreEquivalent(func_values, func_values_transformed);
+
+            func_values = new double[] { 150.0, 250.0, 0.0, 15.0};
+            coeffs = transformation.doAnalysis(func_values);
+            func_values_transformed = transformation.doSynthesis(coeffs);
+            CollectionAssert.AreEquivalent(func_values, func_values_transformed);
+
+            func_values = new double[] { 150.0, -250.0, 0.0, 15.0, -150.0, 250.0, 35.0, 15.0 };
+            coeffs = transformation.doAnalysis(func_values);
+            func_values_transformed = transformation.doSynthesis(coeffs);
             CollectionAssert.AreEquivalent(func_values, func_values_transformed);
         }
     }

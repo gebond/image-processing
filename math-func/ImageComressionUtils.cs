@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 namespace MathFunction {
     public static class ComressionUtils {
         public static int[,] compress(int[,] inputValues, double compression_coeff) {
-            var doubles = compress(createDouble(inputValues), compression_coeff);
-            return createInt(doubles);
+            var doubles = compress(Utils.createDouble(inputValues), compression_coeff);
+            return Utils.createInt(doubles);
         }
         public static double[,] compress(double[,] inputValues, double compression_coeff) {
             if(compression_coeff < 0 || compression_coeff > 100) {
@@ -35,18 +35,18 @@ namespace MathFunction {
                 }
             }
         }
-        private static int find_min_value(double[,] target) {
-            var min_value = Int32.MaxValue;
+        private static double find_min_value(double[,] target) {
+            var min_value = Double.MaxValue;
             Parallel.For(0, target.GetLength(0), i => {
                 for(int j = 0; j < target.GetLength(1); j++) {
-                    if(target[i, j] != 0 && target[i, j] < min_value) {
-                        min_value = (int) target[i, j];
+                    if(target[i, j] != 0 && Math.Abs(target[i, j]) < min_value) {
+                        min_value = target[i, j];
                     }
                 }
             });
             return min_value;
         }
-        private static bool delete_first_by_value(double[,] target, int targetValue) {
+        private static bool delete_first_by_value(double[,] target, double targetValue) {
             for(int i = 0; i < target.GetLength(0); i++) {
                 for(int j = 0; j < target.GetLength(1); j++) {
                     if(target[i, j] == targetValue) {
@@ -57,25 +57,6 @@ namespace MathFunction {
             }
             return false;
         }
-        private static double[,] createDouble(int[,] intValues) {
-            var result = new double[intValues.GetLength(0), intValues.GetLength(1)];
-            Parallel.For(0, intValues.GetLength(0), i => {
-                for(int j = 0; j < intValues.GetLength(1); j++) {
-                    result[i, j] = (double) intValues[i, j];
-                }
-            });
-            return result;
-        }
-        private static int[,] createInt(double[,] doubleValues) {
-            var result = new int[doubleValues.GetLength(0), doubleValues.GetLength(1)];
-            Parallel.For(0, doubleValues.GetLength(0), i => {
-                for(int j = 0; j < doubleValues.GetLength(1); j++) {
-                    result[i, j] = (int) doubleValues[i, j];
-                }
-            });
-            return result;
-        }
         #endregion
-
     }
 }

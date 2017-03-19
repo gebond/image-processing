@@ -215,6 +215,19 @@ namespace MathModuleTests {
             var answer2 = new int[,] { { 0, 0, 0 }, { 0, 0, 3 }, { 0, 0, 3 } };
             CollectionAssert.AreEquivalent(answer2, mass2);
         }
+        [TestMethod]
+        public void compression_all_values() {
+            var mass = new double[,] { { -1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            double coef = 50;
+            mass = ComressionUtils.compress(mass, coef);
+            var answer = new double[,] { { 0, 0, 3 }, { 0, 2, 3 }, { 0, 2, 3 } };
+            CollectionAssert.AreEquivalent(answer, mass);
+            var mass2 = new int[,] { { 1, 2, 3 }, { 1, 2, 3 }, { 1, 2, 3 } };
+            coef = 12;
+            mass2 = ComressionUtils.compress(mass2, coef);
+            var answer2 = new int[,] { { 0, 0, 0 }, { 0, 0, 3 }, { 0, 0, 3 } };
+            CollectionAssert.AreEquivalent(answer2, mass2);
+        }
         #endregion
     }
 }

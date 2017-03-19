@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Threading.Tasks;
+using MathFunction;
 
 namespace ImageProcessingModel {
     /*
@@ -30,7 +31,9 @@ namespace ImageProcessingModel {
             pixeles = new Color[size, size];
             Parallel.For(0, size, i => {
                 for(int j = 0; j < size; j++) {
-                    var color = Color.FromArgb(red_colors[i, j], green_colors[i, j], blue_colors[i, j]);
+                    var color = Color.FromArgb(getValid(red_colors[i, j]),
+                        getValid(green_colors[i, j]), 
+                        getValid(blue_colors[i, j]));
                     pixeles[i, j] = color;
                 }
             });
@@ -55,15 +58,7 @@ namespace ImageProcessingModel {
                 pixeles[i, j] = value;
             }
         }
-        public int[,] getRColors() {
-            return getColor('r');
-        }
-        public int[,] getGColors() {
-            return getColor('g');
-        }
-        public int[,] getBColors() {
-            return getColor('b');
-        }
+
         public int this[int i, int j, int color] {
             get {
                 if(i < 0 || i >= size) {
@@ -80,7 +75,23 @@ namespace ImageProcessingModel {
                 }
             }
         }
+        public ColorElement recalculateElement(double red_rate, double green_rate, double blue_rate) {
+            var reds = getRColors();
+            var red_coeffs = TransformationUtils.get2DCoeffsByWalsh(Utils.createDouble(reds));
+            red_coeffs = ComressionUtils.compress(red_coeffs, red_rate);
+            reds = Utils.createInt(TransformationUtils.get2DValuesByWalsh(red_coeffs));
 
+            var greens = getGColors();
+            var green_coeffs = TransformationUtils.get2DCoeffsByWalsh(Utils.createDouble(greens));
+            green_coeffs = ComressionUtils.compress(green_coeffs, green_rate);
+            greens = Utils.createInt(TransformationUtils.get2DValuesByWalsh(green_coeffs));
+
+            var blues = getBColors();
+            var blue_coeffs = TransformationUtils.get2DCoeffsByWalsh(Utils.createDouble(blues));
+            blue_coeffs = ComressionUtils.compress(blue_coeffs, blue_rate);
+            blues = Utils.createInt(TransformationUtils.get2DValuesByWalsh(blue_coeffs));
+            return new ColorElement(reds, greens, blues);
+        }
         public void print() {
             Console.WriteLine("Element:");
             for(int i = 0; i < size; i++) {
@@ -98,6 +109,15 @@ namespace ImageProcessingModel {
         #endregion
 
         #region private methods
+        private int[,] getRColors() {
+            return getColor('r');
+        }
+        private int[,] getGColors() {
+            return getColor('g');
+        }
+        private int[,] getBColors() {
+            return getColor('b');
+        }
         private int[,] getColor(char color_symbol) {
             var result = new int[size, size];
             Parallel.For(0, size, i => {
@@ -116,6 +136,16 @@ namespace ImageProcessingModel {
                 }
             });
             return result;
+        }
+
+        private int getValid(int value) {
+            if(value > 255) {
+                return 255;
+            }
+            if(value < 0) {
+                return 0;
+            }
+            return value;
         }
         #endregion
 

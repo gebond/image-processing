@@ -1,9 +1,67 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace MathFunction {
-    class TransformationUtils {
+    public static class TransformationUtils {
+        private static FourierTransformation transformWalsh = new FourierWalshTransformation();
+
+        public static double[,] get2DCoeffsByWalsh(double[,] funcValues) {
+            var rows = funcValues.GetLength(0);
+            var cols = funcValues.GetLength(1);
+            var coeffs2d = new double[rows, cols];
+            // 1st step: applying Walsh to rows
+            Parallel.For(0, rows, i => {
+                var row = new double[cols];
+                for(int j = 0; j < cols; j++) {
+                    row[j] = funcValues[i, j];
+                }
+                var coeffs = transformWalsh.doAnalysis(row);
+                for(int j = 0; j < cols; j++) {
+                    coeffs2d[i, j] = coeffs[j];
+                }
+            });
+            // 2nd step: applying Walsh to cols
+            Parallel.For(0, cols, j => {
+                var col = new double[rows];
+                for(int i = 0; i < rows; i++) {
+                    col[i] = coeffs2d[i, j];
+                }
+                var coeffs = transformWalsh.doAnalysis(col);
+                for(int i = 0; i < cols; i++) {
+                    coeffs2d[i, j] = coeffs[i];
+                }
+            });
+            return coeffs2d;
+        }
+
+        public static double[,] get2DValuesByWalsh(double[,] coeffs) {
+            var rows = coeffs.GetLength(0);
+            var cols = coeffs.GetLength(1);
+            var values2d = new double[rows, cols];
+            // 1st step: applying Walsh to cols
+            for(int j = 0; j < cols; j++) {
+                var col = new double[rows];
+                for(int i = 0; i < rows; i++) {
+                    col[i] = coeffs[i, j];
+                }
+                var funValues = transformWalsh.doSynthesis(col);
+                for(int i = 0; i < cols; i++) {
+                    values2d[i, j] = funValues[i];
+                }
+            }
+            // 2nd step: applying Walsh to rows
+            for(int i = 0; i < rows; i++) {
+                var row = new double[cols];
+                for(int j = 0; j < cols; j++) {
+                    row[j] = values2d[i, j];
+                }
+                var funValues = transformWalsh.doSynthesis(row);
+                for(int j = 0; j < cols; j++) {
+                    values2d[i, j] = funValues[j];
+                }
+            }
+            return values2d;
+        }
+
     }
 }

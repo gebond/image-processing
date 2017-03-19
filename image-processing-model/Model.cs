@@ -128,35 +128,12 @@ namespace ImageProcessingModel {
             if(sourceImage == null) {
                 return false;
             }
-            var colorElements = new ColorElements(elementSize, sourceImage);
             Console.WriteLine("\t[Model] Current percentages: R-{0}% G-{1}% B-{2}%", r_percentage,
                 g_percentage, b_percentage);
-            processElements(colorElements);
+            var colorElements = new ColorElements(elementSize, sourceImage);
+            colorElements.processElements(r_percentage, g_percentage, b_percentage);
             resultImage = colorElements.buildImage();
             return resultImage != null;
-        }
-        private void processElements(ColorElements elements) {
-            var recalculatedElements = new List<ColorElement>();
-            foreach(var element in elements.getElementsAsList()) {
-                recalculatedElements.Add(recalculateElement(element));
-            }
-            elements.replaceElements(recalculatedElements);
-        }
-
-        private ColorElement recalculateElement(ColorElement sourceColorElement) {
-            // getting all colors from Element
-            var reds = sourceColorElement.getRColors();
-            var greens = sourceColorElement.getGColors();
-            var blues = sourceColorElement.getBColors();
-            // calculate
-            reds = processPixelsArray(reds);
-            greens = processPixelsArray(greens);
-            blues = processPixelsArray(blues);
-            // compress result values
-            reds = ComressionUtils.compress(reds, this.r_percentage);
-            greens = ComressionUtils.compress(greens, this.g_percentage);
-            blues = ComressionUtils.compress(blues, this.b_percentage);
-            return new ColorElement(reds, greens, blues);
         }
 
         private int[,] processPixelsArray(int[,] inputValues) {

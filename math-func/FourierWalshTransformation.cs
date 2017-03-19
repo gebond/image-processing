@@ -13,13 +13,9 @@ namespace MathFunction {
             var total_values = new double[len];
             Array.Copy(functionValues, total_values, len);
             var answer = new double[len];
-            if(len != 2) {
-                calculatingValues(total_values, answer, 0);
-            }
+            calculatingValues(total_values, answer, 0);
             return answer;
         }
-
-        
 
         public override double[] doSynthesis(double[] coeffs) {
             if(coeffs == null || coeffs.Length == 0) {
@@ -39,16 +35,18 @@ namespace MathFunction {
             return fun_values;
         }
 
-        private void calculatingValues(double[] input,double[] target, int current) {
+        private void calculatingValues(double[] input, double[] target, int current) {
             var len = input.Length;
             if(len == 1) {
                 target[current] = input[0];
                 return; // exit of recursion
             }
             int N = len / 2;
+            double[] copy = new double[len];
+            Array.Copy(input, copy, len);
             for(int j = 0; j < N; j++) {
-                input[j] = 0.5 * ( input[2 * j] + input[2 * j + 1] );
-                input[N + j] = 0.5 * ( input[2 * j] - input[2 * j + 1] );
+                input[j] = 0.5 * ( copy[2 * j] + copy[2 * j + 1] );
+                input[N + j] = 0.5 * ( copy[2 * j] - copy[2 * j + 1] );
             }
             // recursive calling for both parts of input array
             calculatingValues(input.Skip(0).Take(N).ToArray(), target, current); // left part of input array

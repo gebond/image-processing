@@ -10,29 +10,13 @@ namespace ImageProcessingModel {
         public ColorElements(int sizeOfElement, Bitmap sourceImage) {
             initialize(sizeOfElement, sourceImage);
         }
-        public List<ColorElement> getElementsAsList() {
-            var list = new List<ColorElement>();
-            if(elements == null) {
-                return list;
+        public void processElements(double red_rate, double green_rate, double blue_rate) {
+            var recalculatedElements = new List<ColorElement>();
+            foreach(var element in elements) {
+                recalculatedElements.Add(element.recalculateElement(red_rate, green_rate, blue_rate));
             }
-            for(int i = 0; i < this.rowCount; i++) {
-                for(int j = 0; j < this.colCount; j++) {
-                    list.Add(elements[i, j]);
-                }
-            }
-            return list;
+            replaceElements(recalculatedElements);
         }
-        public void replaceElements(List<ColorElement> newElements) {
-            if(!( newElements.Count == rowCount * colCount )) {
-                throw new ArgumentException("input list has not enough elements");
-            }
-            Parallel.For(0, this.rowCount, i => {
-                for(int j = 0; j < this.colCount; j++) {
-                    elements[i, j] = newElements[i * colCount + j];
-                }
-            });
-        }
-
         public Bitmap buildImage() {
             var height = rowCount * size;
             var width = colCount * size;
@@ -91,6 +75,28 @@ namespace ImageProcessingModel {
                     elements[i / size, j / size][i % size, j % size] = sourceImage.GetPixel(j, i);
                 }
             }
+        }
+        private List<ColorElement> getElementsAsList() {
+            var list = new List<ColorElement>();
+            if(elements == null) {
+                return list;
+            }
+            for(int i = 0; i < this.rowCount; i++) {
+                for(int j = 0; j < this.colCount; j++) {
+                    list.Add(elements[i, j]);
+                }
+            }
+            return list;
+        }
+        private void replaceElements(List<ColorElement> newElements) {
+            if(!( newElements.Count == rowCount * colCount )) {
+                throw new ArgumentException("input list has not enough elements");
+            }
+            Parallel.For(0, this.rowCount, i => {
+                for(int j = 0; j < this.colCount; j++) {
+                    elements[i, j] = newElements[i * colCount + j];
+                }
+            });
         }
         #endregion
     }

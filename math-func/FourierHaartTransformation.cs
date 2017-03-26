@@ -6,35 +6,50 @@ using System.Text;
 namespace MathFunction {
     public class FourierHaartTransformation : FourierTransformation {
 
+
         public override double[] doAnalysis(double[] functionValues) {
             if(functionValues == null) { return null; }
             var len = functionValues.Length;
             if(( len & ( ~len + 1 ) ) != len) { throw new ArgumentException("input len is not power of 2!"); }
-            var fun_values = new double[len];
-            Array.Copy(functionValues, fun_values, len);
-            var N = Math.Log(len, 2);
-            calculatingValues(fun_values);
-            calculatingValues(functionValues);
-            return fun_values;
+            var targetFuncValues = new double[len];
+            Array.Copy(functionValues, targetFuncValues, len);
+            var answer = calculatingValues(targetFuncValues);
+            return answer;
         }
 
         public override double[] doSynthesis(double[] coeffs) {
-            return null;
+            if(coeffs == null || coeffs.Length == 0) {
+                throw new ArgumentException("input coeffs size must be larger than 0");
+            }
+            var n = coeffs.Length;
+            var fun_values = new double[n];
+            var x = createXValues(n);
+            for(int i = 0; i < n; i++) {
+                var fun_ith = 0.0;
+                for(int j = 0; j < n; j++) {
+                    var walsh = FunctionUtils.walsh(j, x[i]);
+                    fun_ith += coeffs[j] * walsh;
+                }
+                fun_values[i] = fun_ith;
+            }
+            return fun_values;
         }
 
-        private void calculatingValues(double[] input) {
+        private double[] calculatingValues(double[] input) {
             var len = input.Length;
-            if(len == 1) {
-                return; // exit of recursion
+
+            var k = (int) Math.Log(len, 2);
+
+            while(k > 0) {
+                double[] copy = new double[len];
+                Array.Copy(input, copy, len);
+                for(int j = 0; j < k; j++) {
+                    input[j] = 0.5 * ( copy[2 * j] + copy[2 * j + 1] );
+                    input[(int) Math.Pow(2, k - 1) + j] = 0.5 * ( copy[2 * j] - copy[2 * j + 1] );
+                }
+                k--;
             }
-            int N = len / 2;
-            for(int j = 0; j < N; j++) {
-                input[j] = 0.5 * (input[2 * j] + input[2 * j + 1]);
-                input[N + j] = 0.5 * (input[2 * j] - input[2 * j + 1]);
-            }
-            // recursive calling for both parts of input array
-            calculatingValues(input.Skip(0).Take(N).ToArray()); // left part of input array
-            //calculatingValues(input.Skip(N).Take(N).ToArray()); // right part missed because of haart system
+            return input;
         }
 
         public override string ToString() {

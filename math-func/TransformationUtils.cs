@@ -3,9 +3,8 @@ using System.Threading.Tasks;
 
 namespace MathFunction {
     public static class TransformationUtils {
-        private static FourierTransformation transformWalsh = new FourierWalshTransformation();
 
-        public static double[,] get2DCoeffsByWalsh(double[,] funcValues) {
+        public static double[,] get2DCoeffs(double[,] funcValues, FourierTransformation transformation) {
             var rows = funcValues.GetLength(0);
             var cols = funcValues.GetLength(1);
             var coeffs2d = new double[rows, cols];
@@ -15,7 +14,7 @@ namespace MathFunction {
                 for(int j = 0; j < cols; j++) {
                     row[j] = funcValues[i, j];
                 }
-                var coeffs = transformWalsh.doAnalysis(row);
+                var coeffs = transformation.doAnalysis(row);
                 for(int j = 0; j < cols; j++) {
                     coeffs2d[i, j] = coeffs[j];
                 }
@@ -26,7 +25,7 @@ namespace MathFunction {
                 for(int i = 0; i < rows; i++) {
                     col[i] = coeffs2d[i, j];
                 }
-                var coeffs = transformWalsh.doAnalysis(col);
+                var coeffs = transformation.doAnalysis(col);
                 for(int i = 0; i < cols; i++) {
                     coeffs2d[i, j] = coeffs[i];
                 }
@@ -34,7 +33,7 @@ namespace MathFunction {
             return coeffs2d;
         }
 
-        public static double[,] get2DValuesByWalsh(double[,] coeffs) {
+        public static double[,] get2DValues(double[,] coeffs, FourierTransformation transformation) {
             var rows = coeffs.GetLength(0);
             var cols = coeffs.GetLength(1);
             var values2d = new double[rows, cols];
@@ -44,7 +43,7 @@ namespace MathFunction {
                 for(int i = 0; i < rows; i++) {
                     col[i] = coeffs[i, j];
                 }
-                var funValues = transformWalsh.doSynthesis(col);
+                var funValues = transformation.doSynthesis(col);
                 for(int i = 0; i < cols; i++) {
                     values2d[i, j] = funValues[i];
                 }
@@ -55,7 +54,7 @@ namespace MathFunction {
                 for(int j = 0; j < cols; j++) {
                     row[j] = values2d[i, j];
                 }
-                var funValues = transformWalsh.doSynthesis(row);
+                var funValues = transformation.doSynthesis(row);
                 for(int j = 0; j < cols; j++) {
                     values2d[i, j] = funValues[j];
                 }

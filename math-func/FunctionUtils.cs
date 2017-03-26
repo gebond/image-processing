@@ -6,12 +6,7 @@ namespace MathFunction {
         #region Rademacher Function
         // r_0(x) for x: from 0 to 1
         public static double rademacher(double x) {
-            if(x >= 1) {
-                x = x - Math.Truncate(x);
-            }
-            else if(x < 0) {
-                x = 1 - ( Math.Abs(x) - Math.Truncate(Math.Abs(x)) );
-            }
+            x = getValid(x);
             if(( x >= 0 && x < 0.5 ) || x == 1) {
                 return 1;
             }
@@ -29,7 +24,18 @@ namespace MathFunction {
         #endregion
 
         #region Haart Function
-        public static double haart(int k, double x) {
+        public static double haart(int m, int k, double x) {
+            if(m < 0 && ( k < 0 || k > 2 * m )) {
+                throw new ArgumentException("Wrong args Haart function");
+            }
+            x = getValid(x);
+            var powM = Math.Pow(2, m);
+            if(x >= k / powM && x < ( k + 0.5 ) / powM) {
+                return Math.Sqrt(powM);
+            }
+            if(x >= ( k + 0.5 ) / powM && x < ( k + 1 ) / powM) {
+                return -Math.Sqrt(powM);
+            }
             return 0;
         }
         #endregion
@@ -88,6 +94,18 @@ namespace MathFunction {
                 res += array[i] * Math.Pow(2, i);
             }
             return res;
+        }
+        #endregion
+
+        #region private methods
+        private static double getValid(double x) {
+            if(x >= 1) {
+                x = x - Math.Truncate(x);
+            }
+            else if(x < 0) {
+                x = 1 - ( Math.Abs(x) - Math.Truncate(Math.Abs(x)) );
+            }
+            return x;
         }
         #endregion
     }

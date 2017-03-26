@@ -131,38 +131,9 @@ namespace ImageProcessingModel {
             Console.WriteLine("\t[Model] Current percentages: R-{0}% G-{1}% B-{2}%", r_percentage,
                 g_percentage, b_percentage);
             var colorElements = new ColorElements(elementSize, sourceImage);
-            colorElements.processElements(r_percentage, g_percentage, b_percentage);
+            colorElements.processElements(r_percentage, g_percentage, b_percentage, selectedTransformation);
             resultImage = colorElements.buildImage();
             return resultImage != null;
-        }
-
-        private int[,] processPixelsArray(int[,] inputValues) {
-            var coeffsArray = new double[inputValues.GetLength(0), inputValues.GetLength(1)];
-            var funArray = new int[inputValues.GetLength(0), inputValues.GetLength(1)];
-
-            for(int i = 0; i < inputValues.GetLength(0); i++) {
-                // get row 
-                var row = new double[inputValues.GetLength(1)];
-                for(int j = 0; j < inputValues.GetLength(1); j++) {
-                    row[j] = (double) inputValues[i, j];
-                }
-                // call coeffs
-                var coeffs = selectedTransformation.doAnalysis(row);
-                // call values
-                var values = selectedTransformation.doSynthesis(coeffs);
-                for(int j = 0; j < inputValues.GetLength(1); j++) {
-                    if(values[j] <= 0.0) {
-                        funArray[i, j] = 0;
-                        continue;
-                    }
-                    if(values[j] >= 255.0) {
-                        funArray[i, j] = 255;
-                        continue;
-                    }
-                    funArray[i, j] = (int) values[j];
-                }
-            }
-            return funArray;
         }
         #endregion
     }

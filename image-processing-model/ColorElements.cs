@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
+using MathFunction;
 
 namespace ImageProcessingModel {
     class ColorElements {
@@ -10,10 +11,10 @@ namespace ImageProcessingModel {
         public ColorElements(int sizeOfElement, Bitmap sourceImage) {
             initialize(sizeOfElement, sourceImage);
         }
-        public void processElements(double red_rate, double green_rate, double blue_rate) {
+        public void processElements(double red_rate, double green_rate, double blue_rate, FourierTransformation transformation) {
             var recalculatedElements = new List<ColorElement>();
             foreach(var element in elements) {
-                recalculatedElements.Add(element.recalculateElement(red_rate, green_rate, blue_rate));
+                recalculatedElements.Add(element.recalculateElement(red_rate, green_rate, blue_rate, transformation));
             }
             replaceElements(recalculatedElements);
         }

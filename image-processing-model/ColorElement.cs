@@ -32,7 +32,7 @@ namespace ImageProcessingModel {
             Parallel.For(0, size, i => {
                 for(int j = 0; j < size; j++) {
                     var color = Color.FromArgb(getValid(red_colors[i, j]),
-                        getValid(green_colors[i, j]), 
+                        getValid(green_colors[i, j]),
                         getValid(blue_colors[i, j]));
                     pixeles[i, j] = color;
                 }
@@ -75,21 +75,21 @@ namespace ImageProcessingModel {
                 }
             }
         }
-        public ColorElement recalculateElement(double red_rate, double green_rate, double blue_rate) {
+        public ColorElement recalculateElement(double red_rate, double green_rate, double blue_rate, FourierTransformation transformation) {
             var reds = getRColors();
-            var red_coeffs = TransformationUtils.get2DCoeffsByWalsh(Utils.createDouble(reds));
+            var red_coeffs = TransformationUtils.get2DCoeffs(Utils.createDouble(reds), transformation);
             red_coeffs = ComressionUtils.compress(red_coeffs, red_rate);
-            reds = Utils.createInt(TransformationUtils.get2DValuesByWalsh(red_coeffs));
+            reds = Utils.createInt(TransformationUtils.get2DValues(red_coeffs, transformation));
 
             var greens = getGColors();
-            var green_coeffs = TransformationUtils.get2DCoeffsByWalsh(Utils.createDouble(greens));
+            var green_coeffs = TransformationUtils.get2DCoeffs(Utils.createDouble(greens), transformation);
             green_coeffs = ComressionUtils.compress(green_coeffs, green_rate);
-            greens = Utils.createInt(TransformationUtils.get2DValuesByWalsh(green_coeffs));
+            greens = Utils.createInt(TransformationUtils.get2DValues(green_coeffs, transformation));
 
             var blues = getBColors();
-            var blue_coeffs = TransformationUtils.get2DCoeffsByWalsh(Utils.createDouble(blues));
+            var blue_coeffs = TransformationUtils.get2DCoeffs(Utils.createDouble(blues), transformation);
             blue_coeffs = ComressionUtils.compress(blue_coeffs, blue_rate);
-            blues = Utils.createInt(TransformationUtils.get2DValuesByWalsh(blue_coeffs));
+            blues = Utils.createInt(TransformationUtils.get2DValues(blue_coeffs, transformation));
             return new ColorElement(reds, greens, blues);
         }
         public void print() {

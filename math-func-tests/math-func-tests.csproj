@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FunctionUnitTests.cs" />
+    <Compile Include="HaartTransfTests.cs" />
     <Compile Include="WalshTransfTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -27,7 +27,7 @@ namespace MathFunction {
             for(int i = 0; i < n; i++) {
                 var fun_ith = 0.0;
                 for(int j = 0; j < n; j++) {
-                    var walsh = FunctionUtils.walsh(j, x[i]);
+                    var walsh = FunUtils.walsh(j, x[i]);
                     fun_ith += coeffs[j] * walsh;
                 }
                 fun_values[i] = fun_ith;

@@ -87,6 +87,32 @@ namespace ImageProcessingModel {
             }
             return false;
         }
+        public double getRMSE() {
+            return getMSE(ImageColor.RED);
+        }
+
+        public double getRPSNR() {
+
+            return getPSNR(ImageColor.RED);
+        }
+
+        public double getBMSE() {
+            return getMSE(ImageColor.BLUE);
+        }
+
+        public double getBPSNR() {
+
+            return getPSNR(ImageColor.BLUE);
+        }
+
+        public double getGMSE() {
+            return getMSE(ImageColor.GREEN);
+        }
+
+        public double getGPSNR() {
+
+            return getPSNR(ImageColor.GREEN);
+        }
         #endregion
 
         #region privateFields
@@ -134,6 +160,67 @@ namespace ImageProcessingModel {
             colorElements.processElements(r_percentage, g_percentage, b_percentage, selectedTransformation);
             resultImage = colorElements.buildImage();
             return resultImage != null;
+        }
+        private int[,] processPixelsArray(int[,] inputValues) {
+            var coeffsArray = new double[inputValues.GetLength(0), inputValues.GetLength(1)];
+            var funArray = new int[inputValues.GetLength(0), inputValues.GetLength(1)];
+
+            for(int i = 0; i < inputValues.GetLength(0); i++) {
+                // get row 
+                var row = new double[inputValues.GetLength(1)];
+                for(int j = 0; j < inputValues.GetLength(1); j++) {
+                    row[j] = (double) inputValues[i, j];
+                }
+                // call coeffs
+                var coeffs = selectedTransformation.doAnalysis(row);
+                // call values
+                var values = selectedTransformation.doSynthesis(coeffs);
+                for(int j = 0; j < inputValues.GetLength(1); j++) {
+                    if(values[j] <= 0.0) {
+                        funArray[i, j] = 0;
+                        continue;
+                    }
+                    if(values[j] >= 255.0) {
+                        funArray[i, j] = 255;
+                        continue;
+                    }
+                    funArray[i, j] = (int) values[j];
+                }
+            }
+            return funArray;
+        }
+        private double getMSE(ImageColor color) {
+            var result = 0.0;
+            for(int x = 0; x < resultImage.Width; x++) {
+                for(int y = 0; y < resultImage.Height; y++) {
+                    Color sourcePixel = sourceImage.GetPixel(x, y);
+                    Color resultPixel = resultImage.GetPixel(x, y);
+                    int sourceValue = 0;
+                    int resultValue = 0;
+                    switch(color) {
+                        case ImageColor.RED:
+                            sourceValue = sourcePixel.R;
+                            resultValue = resultPixel.R;
+                            break;
+                        case ImageColor.GREEN:
+                            sourceValue = sourcePixel.G;
+                            resultValue = resultPixel.G;
+                            break;
+                        case ImageColor.BLUE:
+                            sourceValue = sourcePixel.B;
+                            resultValue = resultPixel.B;
+                            break;
+                        default:
+                            break;
+                    }
+                    result += Math.Pow(Math.Abs(sourceValue - resultValue), 2);
+                }
+            }
+            return result / (resultImage.Width * resultImage.Height);
+        }
+        private double getPSNR(ImageColor color) {
+            var mse = getMSE(color);
+            return 10 * Math.Log10(255 * 255 / mse);
         }
         #endregion
     }

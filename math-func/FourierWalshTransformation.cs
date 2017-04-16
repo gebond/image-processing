@@ -52,6 +52,5 @@ namespace MathFunction {
             calculatingValues(input.Skip(0).Take(N).ToArray(), target, current); // left part of input array
             calculatingValues(input.Skip(N).Take(N).ToArray(), target, current + N); // right part
         }
-
     }
 }

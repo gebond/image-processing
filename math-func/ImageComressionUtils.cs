@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace MathFunction {
     public static class ComressionUtils {
@@ -24,38 +26,38 @@ namespace MathFunction {
             if(target_amount_of_deleted == 0) {
                 return; // nothing to delete
             }
-            int amount_of_deleted = 0;
-            while(amount_of_deleted < target_amount_of_deleted) {
-                var min = find_min_value(target);
-                if(delete_first_by_value(target, min)) {
-                    amount_of_deleted += 1;
-                }
-                else {
-                    break; // not found min value
-                }
-            }
-        }
-        private static double find_min_value(double[,] target) {
-            var min_value = Double.MaxValue;
-            Parallel.For(0, target.GetLength(0), i => {
-                for(int j = 0; j < target.GetLength(1); j++) {
-                    if(target[i, j] != 0 && Math.Abs(target[i, j]) < min_value) {
-                        min_value = target[i, j];
-                    }
-                }
-            });
-            return min_value;
-        }
-        private static bool delete_first_by_value(double[,] target, double targetValue) {
+            var list = new List<Value>();
             for(int i = 0; i < target.GetLength(0); i++) {
                 for(int j = 0; j < target.GetLength(1); j++) {
-                    if(target[i, j] == targetValue) {
-                        target[i, j] = 0;
-                        return true;
-                    }
+                    list.Add(new Value(i, j, target[i, j]));
                 }
             }
-            return false;
+            var deleted = 0;
+            var quer = list.OrderBy(x => x.absValue);
+            foreach(var item in quer) {
+                if(deleted < target_amount_of_deleted) {
+                    target[item.i, item.j] = 0;
+                    deleted++;
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        private class Value {
+            public int i;
+            public int j;
+            public double value;
+
+            public double absValue {
+                get { return Math.Abs(value); }
+            }
+
+            public Value(int i, int j, double value) {
+                this.i = i;
+                this.j = j;
+                this.value = value;
+            }
         }
         #endregion
     }

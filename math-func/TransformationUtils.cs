@@ -32,7 +32,6 @@ namespace MathFunction {
             });
             return coeffs2d;
         }
-
         public static double[,] get2DValues(double[,] coeffs, FourierTransformation transformation) {
             var rows = coeffs.GetLength(0);
             var cols = coeffs.GetLength(1);
@@ -61,6 +60,5 @@ namespace MathFunction {
             }
             return values2d;
         }
-
     }
 }

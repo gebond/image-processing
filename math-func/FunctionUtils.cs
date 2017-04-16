@@ -25,18 +25,39 @@ namespace MathFunction {
 
         #region Haart Function
         public static double haart(int m, int k, double x) {
-            if(m < 0 && ( k < 0 || k > 2 * m )) {
-                throw new ArgumentException("Wrong args Haart function");
+            if(k == 0 && m == 0) {
+                return 1.0;
+            }
+            if(k < 0 && ( m < 0 || k >= Math.Pow(2, m) )) {
+                throw new ArgumentException("Wrong args Haart function: k = 0, 1, ..., 2^m - 1");
             }
             x = getValid(x);
             var powM = Math.Pow(2, m);
-            if(x >= k / powM && x < ( k + 0.5 ) / powM) {
-                return Math.Sqrt(powM);
+            if(x >= ( (double) k - 1 ) / powM && x < ( (double) k - 0.5 ) / powM) {
+                //return Math.Sqrt(powM);
+                return 1.0;
             }
-            if(x >= ( k + 0.5 ) / powM && x < ( k + 1 ) / powM) {
-                return -Math.Sqrt(powM);
+            if(x >= ( (double) k - 0.5 ) / powM && x < ( (double) k ) / powM) {
+                //return -Math.Sqrt(powM);
+                return -1.0;
             }
-            return 0;
+            return 0.0;
+        }
+        public static double haart(int n, double x) {
+            if(n == 0) {
+                return haart(0, 0, x);
+            }
+            if(n == 1) {
+                return haart(0, 1, x);
+            }
+            var m = (int) Math.Truncate(Math.Log(n, 2));
+            var k = 1;
+            var targetK = (int) Math.Pow(2, m);
+            while(targetK != n) {
+                targetK++;
+                k++;
+            }
+            return haart(m, k, x);
         }
         #endregion
 

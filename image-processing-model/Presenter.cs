@@ -114,8 +114,8 @@ namespace ImageProcessingModel {
             if(selected_method == null) {
                 return false;
             }
-            if(selected_method.Equals(ImageConstants.FOURIER_BY_MATRIX)) {
-                model.setFourierByMatrix();
+            if(selected_method.Equals(ImageConstants.FOURIER_BY_LOCAL)) {
+                model.setFourierByLocal();
                 return true;
             }
             if(selected_method.Equals(ImageConstants.FOURIER_BY_WALSH)) {

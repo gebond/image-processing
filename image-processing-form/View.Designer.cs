@@ -45,6 +45,12 @@
             this.oldImage1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.resultParamsBox = new System.Windows.Forms.GroupBox();
+            this.g_psnr_delta = new System.Windows.Forms.Label();
+            this.b_psnr_delta = new System.Windows.Forms.Label();
+            this.r_psnr_delta = new System.Windows.Forms.Label();
+            this.g_mse_delta = new System.Windows.Forms.Label();
+            this.b_mse_delta = new System.Windows.Forms.Label();
+            this.r_mse_delta = new System.Windows.Forms.Label();
             this.g_psnr_value = new System.Windows.Forms.TextBox();
             this.b_psnr_value = new System.Windows.Forms.TextBox();
             this.r_psnr_value = new System.Windows.Forms.TextBox();
@@ -56,12 +62,6 @@
             this.b_mse_value = new System.Windows.Forms.TextBox();
             this.r_param_label = new System.Windows.Forms.Label();
             this.r_mse_value = new System.Windows.Forms.TextBox();
-            this.r_mse_delta = new System.Windows.Forms.Label();
-            this.b_mse_delta = new System.Windows.Forms.Label();
-            this.g_mse_delta = new System.Windows.Forms.Label();
-            this.r_psnr_delta = new System.Windows.Forms.Label();
-            this.b_psnr_delta = new System.Windows.Forms.Label();
-            this.g_psnr_delta = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sourceImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resultImage)).BeginInit();
             this.sizeElementBox.SuspendLayout();
@@ -194,7 +194,7 @@
             // 
             this.selectedMethodBox.FormattingEnabled = true;
             this.selectedMethodBox.Items.AddRange(new object[] {
-            "transformation by Matrix",
+            "transformation by LocalField",
             "transformation by Walsh",
             "transformation by Haart"});
             this.selectedMethodBox.Location = new System.Drawing.Point(397, 261);
@@ -308,6 +308,61 @@
             this.resultParamsBox.TabStop = false;
             this.resultParamsBox.Text = "result parameters";
             // 
+            // g_psnr_delta
+            // 
+            this.g_psnr_delta.AutoSize = true;
+            this.g_psnr_delta.Location = new System.Drawing.Point(145, 150);
+            this.g_psnr_delta.Name = "g_psnr_delta";
+            this.g_psnr_delta.Size = new System.Drawing.Size(35, 13);
+            this.g_psnr_delta.TabIndex = 23;
+            this.g_psnr_delta.Text = "label6";
+            // 
+            // b_psnr_delta
+            // 
+            this.b_psnr_delta.AutoSize = true;
+            this.b_psnr_delta.Location = new System.Drawing.Point(145, 108);
+            this.b_psnr_delta.Name = "b_psnr_delta";
+            this.b_psnr_delta.Size = new System.Drawing.Size(35, 13);
+            this.b_psnr_delta.TabIndex = 22;
+            this.b_psnr_delta.Text = "label5";
+            // 
+            // r_psnr_delta
+            // 
+            this.r_psnr_delta.AutoSize = true;
+            this.r_psnr_delta.Location = new System.Drawing.Point(145, 59);
+            this.r_psnr_delta.Name = "r_psnr_delta";
+            this.r_psnr_delta.Size = new System.Drawing.Size(35, 13);
+            this.r_psnr_delta.TabIndex = 21;
+            this.r_psnr_delta.Text = "label4";
+            // 
+            // g_mse_delta
+            // 
+            this.g_mse_delta.AutoSize = true;
+            this.g_mse_delta.Location = new System.Drawing.Point(67, 150);
+            this.g_mse_delta.Name = "g_mse_delta";
+            this.g_mse_delta.Size = new System.Drawing.Size(35, 13);
+            this.g_mse_delta.TabIndex = 20;
+            this.g_mse_delta.Text = "label3";
+            // 
+            // b_mse_delta
+            // 
+            this.b_mse_delta.AutoSize = true;
+            this.b_mse_delta.Location = new System.Drawing.Point(67, 105);
+            this.b_mse_delta.Name = "b_mse_delta";
+            this.b_mse_delta.Size = new System.Drawing.Size(35, 13);
+            this.b_mse_delta.TabIndex = 19;
+            this.b_mse_delta.Text = "label2";
+            // 
+            // r_mse_delta
+            // 
+            this.r_mse_delta.AutoSize = true;
+            this.r_mse_delta.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.r_mse_delta.Location = new System.Drawing.Point(67, 58);
+            this.r_mse_delta.Name = "r_mse_delta";
+            this.r_mse_delta.Size = new System.Drawing.Size(35, 13);
+            this.r_mse_delta.TabIndex = 18;
+            this.r_mse_delta.Text = "label1";
+            // 
             // g_psnr_value
             // 
             this.g_psnr_value.Location = new System.Drawing.Point(133, 127);
@@ -406,61 +461,6 @@
             this.r_mse_value.Size = new System.Drawing.Size(60, 20);
             this.r_mse_value.TabIndex = 7;
             this.r_mse_value.Tag = "";
-            // 
-            // r_mse_delta
-            // 
-            this.r_mse_delta.AutoSize = true;
-            this.r_mse_delta.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.r_mse_delta.Location = new System.Drawing.Point(67, 58);
-            this.r_mse_delta.Name = "r_mse_delta";
-            this.r_mse_delta.Size = new System.Drawing.Size(35, 13);
-            this.r_mse_delta.TabIndex = 18;
-            this.r_mse_delta.Text = "label1";
-            // 
-            // b_mse_delta
-            // 
-            this.b_mse_delta.AutoSize = true;
-            this.b_mse_delta.Location = new System.Drawing.Point(67, 105);
-            this.b_mse_delta.Name = "b_mse_delta";
-            this.b_mse_delta.Size = new System.Drawing.Size(35, 13);
-            this.b_mse_delta.TabIndex = 19;
-            this.b_mse_delta.Text = "label2";
-            // 
-            // g_mse_delta
-            // 
-            this.g_mse_delta.AutoSize = true;
-            this.g_mse_delta.Location = new System.Drawing.Point(67, 150);
-            this.g_mse_delta.Name = "g_mse_delta";
-            this.g_mse_delta.Size = new System.Drawing.Size(35, 13);
-            this.g_mse_delta.TabIndex = 20;
-            this.g_mse_delta.Text = "label3";
-            // 
-            // r_psnr_delta
-            // 
-            this.r_psnr_delta.AutoSize = true;
-            this.r_psnr_delta.Location = new System.Drawing.Point(145, 59);
-            this.r_psnr_delta.Name = "r_psnr_delta";
-            this.r_psnr_delta.Size = new System.Drawing.Size(35, 13);
-            this.r_psnr_delta.TabIndex = 21;
-            this.r_psnr_delta.Text = "label4";
-            // 
-            // b_psnr_delta
-            // 
-            this.b_psnr_delta.AutoSize = true;
-            this.b_psnr_delta.Location = new System.Drawing.Point(145, 108);
-            this.b_psnr_delta.Name = "b_psnr_delta";
-            this.b_psnr_delta.Size = new System.Drawing.Size(35, 13);
-            this.b_psnr_delta.TabIndex = 22;
-            this.b_psnr_delta.Text = "label5";
-            // 
-            // g_psnr_delta
-            // 
-            this.g_psnr_delta.AutoSize = true;
-            this.g_psnr_delta.Location = new System.Drawing.Point(145, 150);
-            this.g_psnr_delta.Name = "g_psnr_delta";
-            this.g_psnr_delta.Size = new System.Drawing.Size(35, 13);
-            this.g_psnr_delta.TabIndex = 23;
-            this.g_psnr_delta.Text = "label6";
             // 
             // View
             // 

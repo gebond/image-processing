@@ -12,7 +12,7 @@ namespace ImageProcessingConstants {
         public static readonly string PERCENTAGE = "percentage";
 
         // transformation methods
-        public static readonly string FOURIER_BY_MATRIX = "fourier-matrix";
+        public static readonly string FOURIER_BY_LOCAL = "fourier-local";
         public static readonly string FOURIER_BY_WALSH = "fourier-walsh";
         public static readonly string FOURIER_BY_HAART = "fourier-haart";
 

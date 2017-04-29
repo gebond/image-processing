@@ -64,9 +64,9 @@ namespace ImageProcessingModel {
             }
             return false;
         }
-        public bool setFourierByMatrix() {
-            selectedTransformation = new FourierWalshByMatrixTransformation();
-            Console.WriteLine("\t[Model] selected WalshByMatrix");
+        public bool setFourierByLocal() {
+            selectedTransformation = new FourierDescreteTransformation();
+            Console.WriteLine("\t[Model] selected Local");
             return selectedTransformation != null;
         }
         public bool setFourierByWalsh() {

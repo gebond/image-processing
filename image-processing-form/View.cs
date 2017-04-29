@@ -99,7 +99,7 @@ namespace ImageProcessingForm {
             var selected_index = selectedMethodBox.SelectedIndex;
             switch(selected_index) {
                 case 0:
-                    return ImageConstants.FOURIER_BY_MATRIX;
+                    return ImageConstants.FOURIER_BY_LOCAL;
                 case 1:
                     return ImageConstants.FOURIER_BY_WALSH;
                 case 2:

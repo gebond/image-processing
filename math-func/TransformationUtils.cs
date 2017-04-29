@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 
 namespace MathFunction {
     public static class TransformationUtils {
-
         public static double[,] get2DCoeffs(double[,] funcValues, FourierTransformation transformation) {
+            if(transformation.GetType().Equals(typeof(FourierDescreteTransformation))) {
+                return Utils.get2dFromArray(transformation.doAnalysis(Utils.get1dFromArray(funcValues)));
+            }
             var rows = funcValues.GetLength(0);
             var cols = funcValues.GetLength(1);
             var coeffs2d = new double[rows, cols];
@@ -33,6 +35,9 @@ namespace MathFunction {
             return coeffs2d;
         }
         public static double[,] get2DValues(double[,] coeffs, FourierTransformation transformation) {
+            if(transformation.GetType().Equals(typeof(FourierDescreteTransformation))) {
+                return Utils.get2dFromArray(transformation.doSynthesis(Utils.get1dFromArray(coeffs)));
+            }
             var rows = coeffs.GetLength(0);
             var cols = coeffs.GetLength(1);
             var values2d = new double[rows, cols];

@@ -1,4 +1,5 @@
 ﻿using System;
+using LinearAlgebra;
 
 namespace MathFunction {
     public static class FunctionUtils {
@@ -115,6 +116,76 @@ namespace MathFunction {
                 res += array[i] * Math.Pow(2, i);
             }
             return res;
+        }
+        #endregion
+
+        #region New SF Feature
+        // is n prime
+        public static bool isPrime(int n) {
+            for(int i = 2; i <= Math.Sqrt(n); i++) {
+                if(n % i == 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static int generateNumberByVector(int p, int s, Vector<IntVector> array) {
+            var result = 0.0;
+            var ps = Math.Pow(p, s);
+            for(int i = 0; i < array.length; i++) {
+                var var = 0.0;
+                for(int j = 0; j < array[i].length; j++) {
+                    var += array[i][j] * Math.Pow(p, j);
+                }
+                result += var * Math.Pow(ps, array.length - 1 - i);
+            }
+            return (int) result;
+        }
+
+        public static Vector<IntVector> getVectorByNumber(GField gfield, int N, int p, int s, int number) {
+            var vector = new Vector<IntVector>(N);
+            for(int i = 0; i < vector.length; i++) {
+                vector[i] = gfield.zero;
+            }
+            foreach(var alpha in gfield.field) {
+                search(gfield, vector, alpha, number, 0, p, s);
+            }
+            return resultVector;
+        }
+
+        private static void search(GField gfield, Vector<IntVector> target, IntVector tryVector, int targetNumber, int currentIndex, int p, int s) {
+            target[currentIndex] = tryVector;
+            if(currentIndex == target.length - 1) {
+                if(generateNumberByVector(p, s, target) == targetNumber) {
+                    resultVector = new Vector<IntVector>(target);
+                    return;
+                }
+                return;
+            }
+            else {
+                foreach(var vector in gfield.field) {
+                    search(gfield, target, vector, targetNumber, currentIndex + 1, p, s);
+                }
+            }
+            return;
+        }
+        private static Vector<IntVector> resultVector;
+        /**
+         * len : length of input array
+         * p: prime
+         * s: lentgth of vectors
+         * N: amount of vectors
+         * */
+        public static int getPParameter(int len, int s, int N) {
+            if(len <= 0 || N <= 0 || s <= 0) {
+                throw new ArgumentException("len, N, s must be > 0");
+            }
+            var sq_len = (int) Math.Pow(len, 1.0 / ( s + N ));
+            if(isPrime(sq_len)) {
+                return sq_len;
+            }
+            throw new ArgumentException("len, N, s are inccorect!");
         }
         #endregion
 

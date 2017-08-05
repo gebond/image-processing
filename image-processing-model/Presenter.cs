@@ -23,7 +23,31 @@ namespace ImageProcessingModel {
             Console.WriteLine("[View] was initialized - all events are handled");
         }
 
-        public void process() {
+        public void onImageSelected(object sender, BitmapEventArgs args) {
+            var image = args.Bitmap;
+            if(image != null && model.setSourceImage(image)) {
+                Console.WriteLine("[Presenter] image was send");
+            }
+            else { Console.WriteLine("[Presenter] image was incorrect - skip"); }
+        }
+        public void onResultImageRequest(object sender, EventArgs args) {
+            processImage();
+            getAndSetParams();
+        }
+        public void Dispose() {
+            if(view != null) {
+                view.imageSelected += onImageSelected;
+            }
+        }
+        #endregion
+
+        #region privateFields
+        IView view;
+        IModel model;
+        #endregion
+
+        #region privateMethods
+        private void processImage() {
             if(!tryGetAllParams()) {
                 return;
             }
@@ -40,60 +64,17 @@ namespace ImageProcessingModel {
                 view.error("ERROR! source image was null");
             }
         }
-        public void onImageSelected(object sender, BitmapEventArgs args) {
-            var image = args.Bitmap;
-            if(image != null && model.setSourceImage(image)) {
-                Console.WriteLine("[Presenter] image was send");
+        private void getAndSetParams() {
+            if(view.getParameterValue(ImageConstants.MSE_PSNR_CALCULATE) == 0) {
+                return;
             }
-            else { Console.WriteLine("[Presenter] image was incorrect - skip"); }
+            view.setColorParameterValue(ImageColor.RED, ImageConstants.PARAM_MSE, model.getRMSE());
+            view.setColorParameterValue(ImageColor.RED, ImageConstants.PARAM_PSNR, model.getRPSNR());
+            view.setColorParameterValue(ImageColor.BLUE, ImageConstants.PARAM_MSE, model.getBMSE());
+            view.setColorParameterValue(ImageColor.BLUE, ImageConstants.PARAM_PSNR, model.getBPSNR());
+            view.setColorParameterValue(ImageColor.GREEN, ImageConstants.PARAM_MSE, model.getGMSE());
+            view.setColorParameterValue(ImageColor.GREEN, ImageConstants.PARAM_PSNR, model.getGPSNR());
         }
-        public void onResultImageRequest(object sender, EventArgs args) {
-            process();
-        }
-        public void onParamInserted(object sender, ParameterNumberEventArgs args) {
-            var value = args.Number;
-            var parameter = args.Parameter;
-            if(parameter.Equals(ImageConstants.RED_PERCENTAGE)) {
-                if(model.setRPercentage(value)) {
-                    Console.WriteLine("[Presenter] r_percantage is set to {0}%", value);
-                }
-                else {
-                    Console.WriteLine("[Presenter] r_percantage was not set");
-                    view.error(ImageConstants.RED_PERCENTAGE + " must be from 0 to 100!");
-                }
-            }
-            if(parameter.Equals(ImageConstants.GREEN_PERCENTAGE)) {
-                if(model.setGPercentage(value)) {
-                    Console.WriteLine("[Presenter] g_percantage is set to {0}%", value);
-                }
-                else {
-                    Console.WriteLine("[Presenter] g_percantage was not set");
-                    view.error(ImageConstants.GREEN_PERCENTAGE + " must be from 0 to 100!");
-                }
-            }
-            if(parameter.Equals(ImageConstants.BLUE_PERCENTAGE)) {
-                if(model.setRPercentage(value)) {
-                    Console.WriteLine("[Presenter] b_percantage is set to {0}%", value);
-                }
-                else {
-                    Console.WriteLine("[Presenter] b_percantage was not set");
-                    view.error(ImageConstants.BLUE_PERCENTAGE + " must be from 0 to 100!");
-                }
-            }
-        }
-        public void Dispose() {
-            if(view != null) {
-                view.imageSelected += onImageSelected;
-            }
-        }
-        #endregion
-
-        #region privateFields
-        IView view;
-        IModel model;
-        #endregion
-
-        #region privateMethods
         private bool tryGetAllParams() {
             if(view == null) {
                 return false;
@@ -108,36 +89,56 @@ namespace ImageProcessingModel {
             }
             return true;
         }
-        bool setParams() {
-            var R_percentage = view.getParameterValue(ImageConstants.RED_PERCENTAGE);
-            if(!model.setRPercentage(R_percentage)) {
-                view.error(ImageConstants.RED_PERCENTAGE + "is incorrect");
-                return false;
+        private bool setParams() {
+            model.setYCrCbEnabled(view.getParameterValue(ImageConstants.YCRCB_ENABLED) == 1);
+            if(view.getParameterValue(ImageConstants.YCRCB_ENABLED) != 1) {
+                var R_percentage = view.getColorParameterValue(ImageColor.RED, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage1(R_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
+                var G_percentage = view.getColorParameterValue(ImageColor.GREEN, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage2(G_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
+                var B_percentage = view.getColorParameterValue(ImageColor.BLUE, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage3(B_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
             }
-            var G_percentage = view.getParameterValue(ImageConstants.GREEN_PERCENTAGE);
-            if(!model.setGPercentage(G_percentage)) {
-                view.error(ImageConstants.GREEN_PERCENTAGE + "is incorrect");
-                return false;
-            }
-            var B_percentage = view.getParameterValue(ImageConstants.BLUE_PERCENTAGE);
-            if(!model.setBPercentage(B_percentage)) {
-                view.error(ImageConstants.BLUE_PERCENTAGE + "is incorrect");
-                return false;
+            else {
+                var Y_percentage = view.getColorParameterValue(ImageColor.Y, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage1(Y_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
+                var Cr_percentage = view.getColorParameterValue(ImageColor.CR, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage2(Cr_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
+                var Cb_percentage = view.getColorParameterValue(ImageColor.CB, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage3(Cb_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
             }
             var size = view.getParameterValue(ImageConstants.ELEMENT_SIZE);
             if(!model.setElementSize((int)size)) {
-                view.error(ImageConstants.ELEMENT_SIZE + "is incorrect");
+                view.error(ImageConstants.ELEMENT_SIZE + " is incorrect");
                 return false;
             }
             return true;
         } 
-        bool setSelectedMethod() {
+        private bool setSelectedMethod() {
             var selected_method = view.getSelectedFourierMethod();
             if(selected_method == null) {
                 return false;
             }
-            if(selected_method.Equals(ImageConstants.FOURIER_BY_MATRIX)) {
-                model.setFourierByMatrix();
+            if(selected_method.Equals(ImageConstants.FOURIER_BY_LOCAL)) {
+                model.setFourierByLocal();
                 return true;
             }
             if(selected_method.Equals(ImageConstants.FOURIER_BY_WALSH)) {

@@ -22,5 +22,27 @@ namespace MathFunction {
             });
             return result;
         }
+
+        public static T[,] get2dFromArray<T>(T[] array) {
+            var len = (int) Math.Sqrt(array.Length);
+            var res = new T[len, len];
+            Parallel.For(0, len,  i => {
+                for(int j = 0; j < len; j++) {
+                    res[i, j] = array[i * len + j];
+                }
+            });
+            return res;
+        }
+
+        public static T[] get1dFromArray<T>(T[,] array) {
+            var len = array.GetLength(0);
+            var res = new T[len*len];
+            Parallel.For(0, len, i => {
+                for(int j = 0; j < len; j++) {
+                    res[i * len + j] = array[i, j];
+                }
+            });
+            return res;
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 using MathFunction;
+using System.Linq;
 
 namespace ImageProcessingModel {
     class ColorElements {
@@ -11,14 +12,19 @@ namespace ImageProcessingModel {
         public ColorElements(int sizeOfElement, Bitmap sourceImage) {
             initialize(sizeOfElement, sourceImage);
         }
-        public void processElements(double red_rate, double green_rate, double blue_rate, FourierTransformation transformation) {
+        public void processElements(bool ycrcbenabled, double rate_1, double rate_2, double rate_3, FourierTransformation transformation) {
             var recalculatedElements = new List<ColorElement>();
+            /*IEnumerable<ColorElement> elementList = getElementsAsList() as IEnumerable<ColorElement>;
+            elementList.AsParallel().ForAll(element =>
+            {
+                recalculatedElements.Add(element.recalculateElement(ycrcbenabled, rate_1, rate_2, rate_3, transformation));
+            });*/
             foreach(var element in elements) {
-                recalculatedElements.Add(element.recalculateElement(red_rate, green_rate, blue_rate, transformation));
+                recalculatedElements.Add(element.recalculateElement(ycrcbenabled, rate_1, rate_2, rate_3, transformation));
             }
             replaceElements(recalculatedElements);
         }
-        public Bitmap buildImage() {
+        public Bitmap buildImage(bool yCrCbEnabled) {
             var height = rowCount * size;
             var width = colCount * size;
             var image = new Bitmap(width, height);
@@ -64,6 +70,7 @@ namespace ImageProcessingModel {
             this.elements = new ColorElement[rowCount, colCount];
         }
         private void createElements() {
+
             Parallel.For(0, rowCount, i => {
                 for(int j = 0; j < this.colCount; j++) {
                     elements[i, j] = new ColorElement(size);

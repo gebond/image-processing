@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 
 namespace MathFunction {
     public static class ComressionUtils {
@@ -15,6 +14,9 @@ namespace MathFunction {
             }
             if(inputValues == null || inputValues.Length == 0) {
                 throw new ArgumentException("input values are null or empty");
+            }
+            if(compression_coeff == 0) {
+                return new double[inputValues.GetLength(0),inputValues.GetLength(1)];
             }
             var amount_to_delete = (int) ( inputValues.Length * ( 1.0 - ( compression_coeff / 100.0 ) ) );
             apply_Coeff(inputValues, amount_to_delete);

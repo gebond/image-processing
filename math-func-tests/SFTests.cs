@@ -106,7 +106,7 @@ namespace MathModuleTests {
             Assert.IsTrue(res == -17);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void sf_analysis() {
             //var funArray = new double[] { 10.0, 20.0, 30.0, 40.0 };
             var funArray = new double[] {   10.0, 20.0, 30.0, 40.0,
@@ -148,6 +148,43 @@ namespace MathModuleTests {
             var result = Utils.get2dFromArray(source1d);
             CollectionAssert.AreEquivalent(source, result);
 
+        }
+        [TestMethod]
+        public void sf_2d() {
+            var source = new double[,] {
+                { 10.0, 220.0, 360.0, 40.0, 11.0, 21.0, 31.0, 41.0,},
+                { 123.0, -20.0, 30.0, 40.0, 11.0, 21.0, 31.0, 41.0,},
+                { 321.0, 20.0, 30.0, 401.0, -11.0, 21.0, 31.0, 41.0,},
+                { 170.0, 201.0, 30.0, 540.0, 11.0, 216.0, 31.0, 41.0,},
+                { 10.0, -20.0, -30.0, 40.0, 11.0, 211.0, 31.0, 41.0,},
+                { 10.0, 20.0, 302.0, 40.0, -11.0, 21.0, 31.0, 41.0,},
+                { 101.0, 201.0, 350.0, 40.0, 11.0, 21.0, 731.0, 41.0,},
+                { 10.0, 20.0, 360.0, 40.0, 121.0, 21.0, 31.0, 41.0,},
+            };
+            var coeffs2d = ((FourierTransformation2D)transformation).doAnalysis(source);
+            var result = ( (FourierTransformation2D) transformation ).doSynthesis(coeffs2d);
+            CollectionAssert.AreEquivalent(source, result);
+
+        }
+
+        [TestMethod]
+        public void sf_test_num_by_vector_fast() {
+            int p = 2;
+            int s = 2;
+            var gfield = new GField(p, s);
+            var num_to_test = 1;
+            var vector = FunctionUtils.getVectorByNumber(gfield, 3, p, s, num_to_test);
+            var num_result =  FunctionUtils.generateNumberByVector(p, s, vector);
+
+            var map = new Dictionary<Vector<IntVector>, int>();
+            map.Add(vector, num_to_test);
+
+
+            var copyVector = new Vector<IntVector>(vector);
+            int val;
+            map.TryGetValue(copyVector, out val);
+
+            Assert.AreEqual(num_to_test, num_result);
         }
     }
 }

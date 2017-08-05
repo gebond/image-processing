@@ -65,6 +65,9 @@ namespace ImageProcessingModel {
             }
         }
         private void getAndSetParams() {
+            if(view.getParameterValue(ImageConstants.MSE_PSNR_CALCULATE) == 0) {
+                return;
+            }
             view.setColorParameterValue(ImageColor.RED, ImageConstants.PARAM_MSE, model.getRMSE());
             view.setColorParameterValue(ImageColor.RED, ImageConstants.PARAM_PSNR, model.getRPSNR());
             view.setColorParameterValue(ImageColor.BLUE, ImageConstants.PARAM_MSE, model.getBMSE());
@@ -87,20 +90,40 @@ namespace ImageProcessingModel {
             return true;
         }
         private bool setParams() {
-            var R_percentage = view.getColorParameterValue(ImageColor.RED, ImageConstants.PERCENTAGE);
-            if(!model.setRPercentage(R_percentage)) {
-                view.error(ImageConstants.PERCENTAGE + " is incorrect");
-                return false;
+            model.setYCrCbEnabled(view.getParameterValue(ImageConstants.YCRCB_ENABLED) == 1);
+            if(view.getParameterValue(ImageConstants.YCRCB_ENABLED) != 1) {
+                var R_percentage = view.getColorParameterValue(ImageColor.RED, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage1(R_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
+                var G_percentage = view.getColorParameterValue(ImageColor.GREEN, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage2(G_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
+                var B_percentage = view.getColorParameterValue(ImageColor.BLUE, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage3(B_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
             }
-            var G_percentage = view.getColorParameterValue(ImageColor.GREEN, ImageConstants.PERCENTAGE);
-            if(!model.setGPercentage(G_percentage)) {
-                view.error(ImageConstants.PERCENTAGE + " is incorrect");
-                return false;
-            }
-            var B_percentage = view.getColorParameterValue(ImageColor.BLUE, ImageConstants.PERCENTAGE);
-            if(!model.setBPercentage(B_percentage)) {
-                view.error(ImageConstants.PERCENTAGE + " is incorrect");
-                return false;
+            else {
+                var Y_percentage = view.getColorParameterValue(ImageColor.Y, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage1(Y_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
+                var Cr_percentage = view.getColorParameterValue(ImageColor.CR, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage2(Cr_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
+                var Cb_percentage = view.getColorParameterValue(ImageColor.CB, ImageConstants.PERCENTAGE);
+                if(!model.setPercentage3(Cb_percentage)) {
+                    view.error(ImageConstants.PERCENTAGE + " is incorrect");
+                    return false;
+                }
             }
             var size = view.getParameterValue(ImageConstants.ELEMENT_SIZE);
             if(!model.setElementSize((int)size)) {

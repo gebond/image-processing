@@ -7,6 +7,9 @@ namespace ImageProcessingConstants {
     public enum ImageColor {
         RED,
         GREEN,
-        BLUE
+        BLUE,
+        Y,
+        CR,
+        CB
     }
 }

@@ -43,7 +43,7 @@ namespace ImageProcessingForm {
                         break;
                     default:
                         break;
-                }               
+                }
             }
             if(parameter_str.Equals(ImageConstants.PARAM_PSNR)) {
                 switch(color) {
@@ -78,6 +78,15 @@ namespace ImageProcessingForm {
                     case ImageColor.BLUE:
                         success = Double.TryParse(parameter_B_percentage.Text, out value);
                         break;
+                    case ImageColor.Y:
+                        success = Double.TryParse(YrateBox.Text, out value);
+                        break;
+                    case ImageColor.CR:
+                        success = Double.TryParse(CrRateBox.Text, out value);
+                        break;
+                    case ImageColor.CB:
+                        success = Double.TryParse(CbRateBox.Text, out value);
+                        break;
                     default:
                         break;
                 }
@@ -91,6 +100,15 @@ namespace ImageProcessingForm {
         public double getParameterValue(string parameter_str) {
             if(parameter_str.Equals(ImageConstants.ELEMENT_SIZE)) {
                 return getSelectedElementSize();
+            }
+            if(parameter_str.Equals(ImageConstants.MSE_PSNR_CALCULATE)) {
+                return getPsnrMseApply();
+            }
+            if(parameter_str.Equals(ImageConstants.MSE_PSNR_CALCULATE)) {
+                return getPsnrMseApply();
+            }
+            if(parameter_str.Equals(ImageConstants.YCRCB_ENABLED)) {
+                return getYcrCbEnabled();
             }
             throw new ArgumentException("Parameter {0} not found on view " + parameter_str);
         }
@@ -204,6 +222,21 @@ namespace ImageProcessingForm {
             }
             return 8;
         }
+
+        private int getPsnrMseApply() {
+            if(psnrMseApply.Checked) {
+                return 1;
+            }
+            return 0;
+        }
+
+        private int getYcrCbEnabled() {
+            if(groupBox1.Enabled) {
+                return 1;
+            }
+            return 0;
+        }
+
         private void setNewValueWithDelta(double newValue, TextBox oldValueBox, Label targetLabel) {
             if(!oldValueBox.Text.Equals("")) {
                 double oldValue = Convert.ToDouble(oldValueBox.Text);
@@ -221,5 +254,42 @@ namespace ImageProcessingForm {
             oldValueBox.Text = Convert.ToString(newValue);
         }
         #endregion
+
+        private void groupBox1_Enter(object sender, EventArgs e) {
+            // ycrcb box click
+            var box = sender as GroupBox;
+            if(box != null) {
+                changeGroupBox(box, colorParamsBox);
+            }
+        }
+
+        private void colorParamsBox_Enter(object sender, EventArgs e) {
+            // rgb box click
+            var box = sender as GroupBox;
+            if(box != null) {
+                changeGroupBox(box, groupBox1);
+            }
+        }
+
+        private void changeGroupBox(GroupBox groupBox, GroupBox anotherGroupBox) {
+            if(groupBox.Enabled == true) {
+                return;
+            }
+            else {
+                groupBox.Enabled = true;
+                anotherGroupBox.Enabled = false;
+            }
+        }
+
+        private void changeGroup_Click(object sender, EventArgs e) {
+            if(groupBox1.Enabled == true) {
+                groupBox1.Enabled = false;
+                colorParamsBox.Enabled = true;
+            }
+            else {
+                groupBox1.Enabled = true;
+                colorParamsBox.Enabled = false;
+            }
+        }
     }
 }

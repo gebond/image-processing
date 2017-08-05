@@ -9,6 +9,7 @@ namespace ImageProcessingConstants {
         public static readonly string ELEMENT_SIZE = "element-size";
 
         // channels colors
+        public static readonly string YCRCB_ENABLED = "YCrCb-enabled";
         public static readonly string PERCENTAGE = "percentage";
 
         // transformation methods
@@ -17,6 +18,7 @@ namespace ImageProcessingConstants {
         public static readonly string FOURIER_BY_HAART = "fourier-haart";
 
         //params
+        public static readonly string MSE_PSNR_CALCULATE = "mse-psnr-calculate";
         public static readonly string PARAM_MSE = "param-mse";
         public static readonly string PARAM_PSNR = "param-psnr";
     }

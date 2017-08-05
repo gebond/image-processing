@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FourierTransformation2D.cs" />
+    <Compile Include="FastFourierTransformationByFrequency.cs" />
     <Compile Include="FourierDescreteTransformation.cs" />
     <Compile Include="FourierTransformation.cs" />
     <Compile Include="FourierWalshTransformation.cs" />

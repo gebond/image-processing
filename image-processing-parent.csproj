@@ -54,6 +54,14 @@
       <Project>{4bd32816-287b-4f08-b635-43a34da97891}</Project>
       <Name>image-processing-model</Name>
     </ProjectReference>
+    <ProjectReference Include="math-func\math-func.csproj">
+      <Project>{effa9fab-eb8d-4074-8df0-d6e301d61926}</Project>
+      <Name>math-func</Name>
+    </ProjectReference>
+    <ProjectReference Include="math-linear-algebra\math-linear-algebra.csproj">
+      <Project>{9a3db9bb-482a-4008-8370-7a00a85b64e2}</Project>
+      <Name>math-linear-algebra</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

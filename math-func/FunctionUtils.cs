@@ -189,6 +189,13 @@ namespace MathFunction {
         }
         #endregion
 
+        #region Fourier Transformation
+        // return only real part
+        public static double exp(int n) {
+            return Math.Cos(2 * Math.PI / n);
+        }
+        #endregion
+
         #region private methods
         private static double getValid(double x) {
             if(x >= 1) {

@@ -4,7 +4,7 @@ using ImageProcessingConstants;
 
 namespace ImageProcessingForm {
     public interface IView {
-        event EventHandler<BitmapEventArgs> imageSelected;
+        event EventHandler<BitmapEventArgs> imageSelected;  
         event EventHandler resultImageRequest;
         //event EventHandler<ColorParameterNumberEventArgs> parameterInserted;
 

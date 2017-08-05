@@ -12,8 +12,8 @@ namespace ImageProcessingModel {
         public Model() {
             init();
             Console.WriteLine("\t[Model] was initialized successfully");
-            Console.WriteLine("\t[Model] params: r_p={0}% g_p={1}% b_p={2}% selectedMetod:{3}",
-                r_percentage, g_percentage, b_percentage, selectedTransformation);
+            Console.WriteLine("\t[Model] params: 1_p={0}% 2_p={1}% 3_p={2}% selectedMetod:{3}",
+                percentage_1, percentage_2, percentage_3, selectedTransformation);
         }
 
         #region IModel implemenation
@@ -43,23 +43,29 @@ namespace ImageProcessingModel {
             }
             else { return null; }
         }
-        public bool setRPercentage(double r_percentage) {
-            if(validate_percentage(r_percentage)) {
-                this.r_percentage = r_percentage;
+
+        public bool setYCrCbEnabled(bool ycrcbenabled) {
+            this.ycrcbenabled = ycrcbenabled;
+            return true;
+        }
+
+        public bool setPercentage1(double percentage_1) {
+            if(validate_percentage(percentage_1)) {
+                this.percentage_1 = percentage_1;
                 return true;
             }
             return false;
         }
-        public bool setGPercentage(double g_percentage) {
-            if(validate_percentage(g_percentage)) {
-                this.g_percentage = g_percentage;
+        public bool setPercentage2(double percentage_2) {
+            if(validate_percentage(percentage_2)) {
+                this.percentage_2 = percentage_2;
                 return true;
             }
             return false;
         }
-        public bool setBPercentage(double b_percentage) {
-            if(validate_percentage(b_percentage)) {
-                this.b_percentage = b_percentage;
+        public bool setPercentage3(double percentage_3) {
+            if(validate_percentage(percentage_3)) {
+                this.percentage_3 = percentage_3;
                 return true;
             }
             return false;
@@ -120,9 +126,10 @@ namespace ImageProcessingModel {
         Bitmap sourceImage;
         Bitmap resultImage;
         // parameters
-        double r_percentage;
-        double g_percentage;
-        double b_percentage;
+        double percentage_1;
+        double percentage_2;
+        double percentage_3;
+        bool ycrcbenabled;
         int elementSize;
         FourierTransformation selectedTransformation;
         #endregion
@@ -131,9 +138,10 @@ namespace ImageProcessingModel {
         private void init() {
             sourceImage = null;
             resultImage = null;
-            r_percentage = 100.0;
-            g_percentage = 100.0;
-            b_percentage = 100.0;
+            percentage_1 = 100.0;
+            percentage_2 = 100.0;
+            percentage_3 = 100.0;
+            ycrcbenabled = false;
             selectedTransformation = null;
         }
         private bool validate_percentage(double percentage) {
@@ -154,11 +162,11 @@ namespace ImageProcessingModel {
             if(sourceImage == null) {
                 return false;
             }
-            Console.WriteLine("\t[Model] Current percentages: R-{0}% G-{1}% B-{2}%", r_percentage,
-                g_percentage, b_percentage);
+            Console.WriteLine("\t[Model] Current percentages: R-{0}% G-{1}% B-{2}%", percentage_1,
+                percentage_2, percentage_3);
             var colorElements = new ColorElements(elementSize, sourceImage);
-            colorElements.processElements(r_percentage, g_percentage, b_percentage, selectedTransformation);
-            resultImage = colorElements.buildImage();
+            colorElements.processElements(ycrcbenabled, percentage_1, percentage_2, percentage_3, selectedTransformation);
+            resultImage = colorElements.buildImage(ycrcbenabled);
             return resultImage != null;
         }
         private int[,] processPixelsArray(int[,] inputValues) {

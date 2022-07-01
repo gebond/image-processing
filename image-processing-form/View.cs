@@ -11,13 +11,17 @@ using ImageProcessingConstants;
 
 namespace ImageProcessingForm {
     public partial class View : Form, IView {
+
+        #region constructor
         public View() {
             InitializeComponent();
         }
+        #endregion
+
         #region IView implementaion 
         public event EventHandler<BitmapEventArgs> imageSelected;
         public event EventHandler resultImageRequest;
-        public event EventHandler<ParameterNumberEventArgs> parameterInserted;
+        //public event EventHandler<ColorParameterNumberEventArgs> parameterInserted;
 
         public void setResultImage(Bitmap image) {
             if(resultImage != null) {
@@ -25,27 +29,86 @@ namespace ImageProcessingForm {
                 resultImage.Invalidate();
             }
         }
+        public void setColorParameterValue(ImageColor color, string parameter_str, double value) {
+            if(parameter_str.Equals(ImageConstants.PARAM_MSE)) {
+                switch(color) {
+                    case ImageColor.RED:
+                        setNewValueWithDelta(value, r_mse_value, r_mse_delta);
+                        break;
+                    case ImageColor.GREEN:
+                        setNewValueWithDelta(value, g_mse_value, g_mse_delta);
+                        break;
+                    case ImageColor.BLUE:
+                        setNewValueWithDelta(value, b_mse_value, b_mse_delta);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if(parameter_str.Equals(ImageConstants.PARAM_PSNR)) {
+                switch(color) {
+                    case ImageColor.RED:
+                        setNewValueWithDelta(value, r_psnr_value, r_psnr_delta);
+                        break;
+                    case ImageColor.GREEN:
+                        setNewValueWithDelta(value, g_psnr_value, g_psnr_delta);
+                        break;
+                    case ImageColor.BLUE:
+                        setNewValueWithDelta(value, b_psnr_value, b_psnr_delta);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         public void error(string message) {
             errorMessage.Text = message;
         }
-        public double getParameterValue(string parameter_str) {
-            if(parameter_str.Equals(ImageConstants.RED_PERCENTAGE)) {
-                double value;
-                var success = Double.TryParse(parameter_R_percentage.Text, out value);
-                return ( success ) ? value : 0.0;
-            }
-            if(parameter_str.Equals(ImageConstants.GREEN_PERCENTAGE)) {
-                double value;
-                var success = Double.TryParse(parameter_G_percentage.Text, out value);
-                return ( success ) ? value : 0.0;
-            }
-            if(parameter_str.Equals(ImageConstants.BLUE_PERCENTAGE)) {
-                double value;
-                var success = Double.TryParse(parameter_B_percentage.Text, out value);
+        public double getColorParameterValue(ImageColor color, string parameter_str) {
+            if(parameter_str.Equals(ImageConstants.PERCENTAGE)) {
+                double value = 0.0;
+                bool success = false;
+                switch(color) {
+                    case ImageColor.RED:
+                        success = Double.TryParse(parameter_R_percentage.Text, out value);
+                        break;
+                    case ImageColor.GREEN:
+                        success = Double.TryParse(parameter_G_percentage.Text, out value);
+                        break;
+                    case ImageColor.BLUE:
+                        success = Double.TryParse(parameter_B_percentage.Text, out value);
+                        break;
+                    case ImageColor.Y:
+                        success = Double.TryParse(YrateBox.Text, out value);
+                        break;
+                    case ImageColor.CR:
+                        success = Double.TryParse(CrRateBox.Text, out value);
+                        break;
+                    case ImageColor.CB:
+                        success = Double.TryParse(CbRateBox.Text, out value);
+                        break;
+                    default:
+                        break;
+                }
                 return ( success ) ? value : 0.0;
             }
             if(parameter_str.Equals(ImageConstants.ELEMENT_SIZE)) {
                 return getSelectedElementSize();
+            }
+            throw new ArgumentException("Parameter {0} not found on view " + parameter_str);
+        }
+        public double getParameterValue(string parameter_str) {
+            if(parameter_str.Equals(ImageConstants.ELEMENT_SIZE)) {
+                return getSelectedElementSize();
+            }
+            if(parameter_str.Equals(ImageConstants.MSE_PSNR_CALCULATE)) {
+                return getPsnrMseApply();
+            }
+            if(parameter_str.Equals(ImageConstants.MSE_PSNR_CALCULATE)) {
+                return getPsnrMseApply();
+            }
+            if(parameter_str.Equals(ImageConstants.YCRCB_ENABLED)) {
+                return getYcrCbEnabled();
             }
             throw new ArgumentException("Parameter {0} not found on view " + parameter_str);
         }
@@ -54,7 +117,7 @@ namespace ImageProcessingForm {
             var selected_index = selectedMethodBox.SelectedIndex;
             switch(selected_index) {
                 case 0:
-                    return ImageConstants.FOURIER_BY_MATRIX;
+                    return ImageConstants.FOURIER_BY_LOCAL;
                 case 1:
                     return ImageConstants.FOURIER_BY_WALSH;
                 case 2:
@@ -159,6 +222,74 @@ namespace ImageProcessingForm {
             }
             return 8;
         }
+
+        private int getPsnrMseApply() {
+            if(psnrMseApply.Checked) {
+                return 1;
+            }
+            return 0;
+        }
+
+        private int getYcrCbEnabled() {
+            if(groupBox1.Enabled) {
+                return 1;
+            }
+            return 0;
+        }
+
+        private void setNewValueWithDelta(double newValue, TextBox oldValueBox, Label targetLabel) {
+            if(!oldValueBox.Text.Equals("")) {
+                double oldValue = Convert.ToDouble(oldValueBox.Text);
+                double delta = ( ( newValue - oldValue ) / oldValue ) * 100;
+                if(delta >= 0) {
+                    targetLabel.ForeColor = Color.Green;
+                    targetLabel.Text = "+" + Convert.ToString(delta) + "%";
+                }
+                else {
+                    targetLabel.ForeColor = Color.Red;
+                    targetLabel.Text = "-" + Convert.ToString(delta) + "%";
+                }
+                targetLabel.Text = Convert.ToString(delta);
+            }
+            oldValueBox.Text = Convert.ToString(newValue);
+        }
         #endregion
+
+        private void groupBox1_Enter(object sender, EventArgs e) {
+            // ycrcb box click
+            var box = sender as GroupBox;
+            if(box != null) {
+                changeGroupBox(box, colorParamsBox);
+            }
+        }
+
+        private void colorParamsBox_Enter(object sender, EventArgs e) {
+            // rgb box click
+            var box = sender as GroupBox;
+            if(box != null) {
+                changeGroupBox(box, groupBox1);
+            }
+        }
+
+        private void changeGroupBox(GroupBox groupBox, GroupBox anotherGroupBox) {
+            if(groupBox.Enabled == true) {
+                return;
+            }
+            else {
+                groupBox.Enabled = true;
+                anotherGroupBox.Enabled = false;
+            }
+        }
+
+        private void changeGroup_Click(object sender, EventArgs e) {
+            if(groupBox1.Enabled == true) {
+                groupBox1.Enabled = false;
+                colorParamsBox.Enabled = true;
+            }
+            else {
+                groupBox1.Enabled = true;
+                colorParamsBox.Enabled = false;
+            }
+        }
     }
 }

@@ -5,8 +5,6 @@ using System.Text;
 
 namespace MathFunction {
     public class FourierHaartTransformation : FourierTransformation {
-
-
         public override double[] doAnalysis(double[] functionValues) {
             if(functionValues == null) { return null; }
             var len = functionValues.Length;
@@ -16,7 +14,6 @@ namespace MathFunction {
             var answer = calculatingValues(targetFuncValues);
             return answer;
         }
-
         public override double[] doSynthesis(double[] coeffs) {
             if(coeffs == null || coeffs.Length == 0) {
                 throw new ArgumentException("input coeffs size must be larger than 0");
@@ -27,14 +24,13 @@ namespace MathFunction {
             for(int i = 0; i < n; i++) {
                 var fun_ith = 0.0;
                 for(int j = 0; j < n; j++) {
-                    var walsh = FunctionUtils.walsh(j, x[i]);
-                    fun_ith += coeffs[j] * walsh;
+                    var haart = FunctionUtils.haart(j, x[i]);
+                    fun_ith += coeffs[j] * haart;
                 }
                 fun_values[i] = fun_ith;
             }
             return fun_values;
         }
-
         private double[] calculatingValues(double[] input) {
             var len = input.Length;
 
@@ -43,7 +39,7 @@ namespace MathFunction {
             while(k > 0) {
                 double[] copy = new double[len];
                 Array.Copy(input, copy, len);
-                for(int j = 0; j < k; j++) {
+                for(int j = 0; j < (int) Math.Pow(2, k - 1); j++) {
                     input[j] = 0.5 * ( copy[2 * j] + copy[2 * j + 1] );
                     input[(int) Math.Pow(2, k - 1) + j] = 0.5 * ( copy[2 * j] - copy[2 * j + 1] );
                 }

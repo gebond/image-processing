@@ -53,8 +53,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FFTTests.cs" />
     <Compile Include="FunctionUnitTests.cs" />
     <Compile Include="HaartTransfTests.cs" />
+    <Compile Include="SFTests.cs" />
     <Compile Include="WalshTransfTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,6 +64,10 @@
     <ProjectReference Include="..\math-func\math-func.csproj">
       <Project>{effa9fab-eb8d-4074-8df0-d6e301d61926}</Project>
       <Name>math-func</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\math-linear-algebra\math-linear-algebra.csproj">
+      <Project>{9a3db9bb-482a-4008-8370-7a00a85b64e2}</Project>
+      <Name>math-linear-algebra</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

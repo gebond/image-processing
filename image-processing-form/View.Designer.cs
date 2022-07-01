@@ -42,10 +42,44 @@
             this.radioButton_16 = new System.Windows.Forms.RadioButton();
             this.radioButton_32 = new System.Windows.Forms.RadioButton();
             this.colorParamsBox = new System.Windows.Forms.GroupBox();
+            this.oldImage1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.resultParamsBox = new System.Windows.Forms.GroupBox();
+            this.psnrMseApply = new System.Windows.Forms.CheckBox();
+            this.g_psnr_delta = new System.Windows.Forms.Label();
+            this.b_psnr_delta = new System.Windows.Forms.Label();
+            this.r_psnr_delta = new System.Windows.Forms.Label();
+            this.g_mse_delta = new System.Windows.Forms.Label();
+            this.b_mse_delta = new System.Windows.Forms.Label();
+            this.r_mse_delta = new System.Windows.Forms.Label();
+            this.g_psnr_value = new System.Windows.Forms.TextBox();
+            this.b_psnr_value = new System.Windows.Forms.TextBox();
+            this.r_psnr_value = new System.Windows.Forms.TextBox();
+            this.psnr_param_label = new System.Windows.Forms.Label();
+            this.mse_param_label = new System.Windows.Forms.Label();
+            this.g_param_label = new System.Windows.Forms.Label();
+            this.g_mse_value = new System.Windows.Forms.TextBox();
+            this.b_param_label = new System.Windows.Forms.Label();
+            this.b_mse_value = new System.Windows.Forms.TextBox();
+            this.r_param_label = new System.Windows.Forms.Label();
+            this.r_mse_value = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.YrateBox = new System.Windows.Forms.TextBox();
+            this.CrRateBox = new System.Windows.Forms.TextBox();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.CbRateBox = new System.Windows.Forms.TextBox();
+            this.changeGroupButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sourceImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resultImage)).BeginInit();
             this.sizeElementBox.SuspendLayout();
             this.colorParamsBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.oldImage1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.resultParamsBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sourceImage
@@ -70,9 +104,9 @@
             // 
             // selectImage
             // 
-            this.selectImage.Location = new System.Drawing.Point(105, 330);
+            this.selectImage.Location = new System.Drawing.Point(397, 12);
             this.selectImage.Name = "selectImage";
-            this.selectImage.Size = new System.Drawing.Size(125, 23);
+            this.selectImage.Size = new System.Drawing.Size(193, 23);
             this.selectImage.TabIndex = 2;
             this.selectImage.Text = "Select source image";
             this.selectImage.UseVisualStyleBackColor = true;
@@ -86,7 +120,7 @@
             // 
             this.errorMessage.AutoSize = true;
             this.errorMessage.ForeColor = System.Drawing.Color.Red;
-            this.errorMessage.Location = new System.Drawing.Point(739, 360);
+            this.errorMessage.Location = new System.Drawing.Point(10, 10);
             this.errorMessage.Name = "errorMessage";
             this.errorMessage.Size = new System.Drawing.Size(0, 13);
             this.errorMessage.TabIndex = 3;
@@ -94,9 +128,9 @@
             // 
             // getResultImage
             // 
-            this.getResultImage.Location = new System.Drawing.Point(756, 330);
+            this.getResultImage.Location = new System.Drawing.Point(571, 262);
             this.getResultImage.Name = "getResultImage";
-            this.getResultImage.Size = new System.Drawing.Size(124, 23);
+            this.getResultImage.Size = new System.Drawing.Size(52, 50);
             this.getResultImage.TabIndex = 4;
             this.getResultImage.Text = "Get result image";
             this.getResultImage.UseVisualStyleBackColor = true;
@@ -159,7 +193,7 @@
             // 
             // reset
             // 
-            this.reset.Location = new System.Drawing.Point(16, 158);
+            this.reset.Location = new System.Drawing.Point(16, 146);
             this.reset.Name = "reset";
             this.reset.Size = new System.Drawing.Size(55, 23);
             this.reset.TabIndex = 11;
@@ -171,10 +205,10 @@
             // 
             this.selectedMethodBox.FormattingEnabled = true;
             this.selectedMethodBox.Items.AddRange(new object[] {
-            "transformation by Matrix",
+            "transformation by LocalField",
             "transformation by Walsh",
             "transformation by Haart"});
-            this.selectedMethodBox.Location = new System.Drawing.Point(405, 241);
+            this.selectedMethodBox.Location = new System.Drawing.Point(372, 262);
             this.selectedMethodBox.Name = "selectedMethodBox";
             this.selectedMethodBox.Size = new System.Drawing.Size(193, 21);
             this.selectedMethodBox.TabIndex = 13;
@@ -185,7 +219,7 @@
             this.sizeElementBox.Controls.Add(this.radioButton_8);
             this.sizeElementBox.Controls.Add(this.radioButton_16);
             this.sizeElementBox.Controls.Add(this.radioButton_32);
-            this.sizeElementBox.Location = new System.Drawing.Point(495, 35);
+            this.sizeElementBox.Location = new System.Drawing.Point(537, 55);
             this.sizeElementBox.Name = "sizeElementBox";
             this.sizeElementBox.Size = new System.Drawing.Size(86, 109);
             this.sizeElementBox.TabIndex = 15;
@@ -196,7 +230,7 @@
             // 
             this.radioButton_8.AutoSize = true;
             this.radioButton_8.Checked = true;
-            this.radioButton_8.Location = new System.Drawing.Point(20, 39);
+            this.radioButton_8.Location = new System.Drawing.Point(26, 38);
             this.radioButton_8.Name = "radioButton_8";
             this.radioButton_8.Size = new System.Drawing.Size(31, 17);
             this.radioButton_8.TabIndex = 2;
@@ -207,7 +241,7 @@
             // radioButton_16
             // 
             this.radioButton_16.AutoSize = true;
-            this.radioButton_16.Location = new System.Drawing.Point(20, 62);
+            this.radioButton_16.Location = new System.Drawing.Point(26, 61);
             this.radioButton_16.Name = "radioButton_16";
             this.radioButton_16.Size = new System.Drawing.Size(37, 17);
             this.radioButton_16.TabIndex = 1;
@@ -217,7 +251,7 @@
             // radioButton_32
             // 
             this.radioButton_32.AutoSize = true;
-            this.radioButton_32.Location = new System.Drawing.Point(20, 86);
+            this.radioButton_32.Location = new System.Drawing.Point(26, 85);
             this.radioButton_32.Name = "radioButton_32";
             this.radioButton_32.Size = new System.Drawing.Size(37, 17);
             this.radioButton_32.TabIndex = 0;
@@ -234,19 +268,321 @@
             this.colorParamsBox.Controls.Add(this.label_B_percentage);
             this.colorParamsBox.Controls.Add(this.label_parameter_G);
             this.colorParamsBox.Controls.Add(this.parameter_G_percentage);
-            this.colorParamsBox.Location = new System.Drawing.Point(405, 35);
+            this.colorParamsBox.Enabled = false;
+            this.colorParamsBox.Location = new System.Drawing.Point(372, 55);
             this.colorParamsBox.Name = "colorParamsBox";
-            this.colorParamsBox.Size = new System.Drawing.Size(84, 185);
+            this.colorParamsBox.Size = new System.Drawing.Size(84, 172);
             this.colorParamsBox.TabIndex = 16;
             this.colorParamsBox.TabStop = false;
             this.colorParamsBox.Text = "color rate";
+            this.colorParamsBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.colorParamsBox_Enter);
+            // 
+            // oldImage1
+            // 
+            this.oldImage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.oldImage1.Location = new System.Drawing.Point(629, 330);
+            this.oldImage1.Name = "oldImage1";
+            this.oldImage1.Size = new System.Drawing.Size(170, 170);
+            this.oldImage1.TabIndex = 17;
+            this.oldImage1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox2.Location = new System.Drawing.Point(813, 330);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(170, 170);
+            this.pictureBox2.TabIndex = 18;
+            this.pictureBox2.TabStop = false;
+            // 
+            // resultParamsBox
+            // 
+            this.resultParamsBox.Controls.Add(this.psnrMseApply);
+            this.resultParamsBox.Controls.Add(this.g_psnr_delta);
+            this.resultParamsBox.Controls.Add(this.b_psnr_delta);
+            this.resultParamsBox.Controls.Add(this.r_psnr_delta);
+            this.resultParamsBox.Controls.Add(this.g_mse_delta);
+            this.resultParamsBox.Controls.Add(this.b_mse_delta);
+            this.resultParamsBox.Controls.Add(this.r_mse_delta);
+            this.resultParamsBox.Controls.Add(this.g_psnr_value);
+            this.resultParamsBox.Controls.Add(this.b_psnr_value);
+            this.resultParamsBox.Controls.Add(this.r_psnr_value);
+            this.resultParamsBox.Controls.Add(this.psnr_param_label);
+            this.resultParamsBox.Controls.Add(this.mse_param_label);
+            this.resultParamsBox.Controls.Add(this.g_param_label);
+            this.resultParamsBox.Controls.Add(this.g_mse_value);
+            this.resultParamsBox.Controls.Add(this.b_param_label);
+            this.resultParamsBox.Controls.Add(this.b_mse_value);
+            this.resultParamsBox.Controls.Add(this.r_param_label);
+            this.resultParamsBox.Controls.Add(this.r_mse_value);
+            this.resultParamsBox.Location = new System.Drawing.Point(397, 330);
+            this.resultParamsBox.Name = "resultParamsBox";
+            this.resultParamsBox.Size = new System.Drawing.Size(200, 170);
+            this.resultParamsBox.TabIndex = 19;
+            this.resultParamsBox.TabStop = false;
+            this.resultParamsBox.Text = "result parameters";
+            // 
+            // psnrMseApply
+            // 
+            this.psnrMseApply.AutoSize = true;
+            this.psnrMseApply.Location = new System.Drawing.Point(11, 15);
+            this.psnrMseApply.Name = "psnrMseApply";
+            this.psnrMseApply.Size = new System.Drawing.Size(51, 17);
+            this.psnrMseApply.TabIndex = 24;
+            this.psnrMseApply.Text = "apply";
+            this.psnrMseApply.UseVisualStyleBackColor = true;
+            // 
+            // g_psnr_delta
+            // 
+            this.g_psnr_delta.AutoSize = true;
+            this.g_psnr_delta.Location = new System.Drawing.Point(145, 150);
+            this.g_psnr_delta.Name = "g_psnr_delta";
+            this.g_psnr_delta.Size = new System.Drawing.Size(35, 13);
+            this.g_psnr_delta.TabIndex = 23;
+            this.g_psnr_delta.Text = "label6";
+            // 
+            // b_psnr_delta
+            // 
+            this.b_psnr_delta.AutoSize = true;
+            this.b_psnr_delta.Location = new System.Drawing.Point(145, 108);
+            this.b_psnr_delta.Name = "b_psnr_delta";
+            this.b_psnr_delta.Size = new System.Drawing.Size(35, 13);
+            this.b_psnr_delta.TabIndex = 22;
+            this.b_psnr_delta.Text = "label5";
+            // 
+            // r_psnr_delta
+            // 
+            this.r_psnr_delta.AutoSize = true;
+            this.r_psnr_delta.Location = new System.Drawing.Point(145, 59);
+            this.r_psnr_delta.Name = "r_psnr_delta";
+            this.r_psnr_delta.Size = new System.Drawing.Size(35, 13);
+            this.r_psnr_delta.TabIndex = 21;
+            this.r_psnr_delta.Text = "label4";
+            // 
+            // g_mse_delta
+            // 
+            this.g_mse_delta.AutoSize = true;
+            this.g_mse_delta.Location = new System.Drawing.Point(67, 150);
+            this.g_mse_delta.Name = "g_mse_delta";
+            this.g_mse_delta.Size = new System.Drawing.Size(35, 13);
+            this.g_mse_delta.TabIndex = 20;
+            this.g_mse_delta.Text = "label3";
+            // 
+            // b_mse_delta
+            // 
+            this.b_mse_delta.AutoSize = true;
+            this.b_mse_delta.Location = new System.Drawing.Point(67, 105);
+            this.b_mse_delta.Name = "b_mse_delta";
+            this.b_mse_delta.Size = new System.Drawing.Size(35, 13);
+            this.b_mse_delta.TabIndex = 19;
+            this.b_mse_delta.Text = "label2";
+            // 
+            // r_mse_delta
+            // 
+            this.r_mse_delta.AutoSize = true;
+            this.r_mse_delta.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.r_mse_delta.Location = new System.Drawing.Point(67, 58);
+            this.r_mse_delta.Name = "r_mse_delta";
+            this.r_mse_delta.Size = new System.Drawing.Size(35, 13);
+            this.r_mse_delta.TabIndex = 18;
+            this.r_mse_delta.Text = "label1";
+            // 
+            // g_psnr_value
+            // 
+            this.g_psnr_value.Location = new System.Drawing.Point(133, 127);
+            this.g_psnr_value.Name = "g_psnr_value";
+            this.g_psnr_value.ReadOnly = true;
+            this.g_psnr_value.Size = new System.Drawing.Size(59, 20);
+            this.g_psnr_value.TabIndex = 17;
+            this.g_psnr_value.Tag = "";
+            // 
+            // b_psnr_value
+            // 
+            this.b_psnr_value.Location = new System.Drawing.Point(133, 85);
+            this.b_psnr_value.Name = "b_psnr_value";
+            this.b_psnr_value.ReadOnly = true;
+            this.b_psnr_value.Size = new System.Drawing.Size(60, 20);
+            this.b_psnr_value.TabIndex = 16;
+            this.b_psnr_value.Tag = "";
+            // 
+            // r_psnr_value
+            // 
+            this.r_psnr_value.Location = new System.Drawing.Point(132, 38);
+            this.r_psnr_value.Name = "r_psnr_value";
+            this.r_psnr_value.ReadOnly = true;
+            this.r_psnr_value.Size = new System.Drawing.Size(60, 20);
+            this.r_psnr_value.TabIndex = 15;
+            this.r_psnr_value.Tag = "";
+            // 
+            // psnr_param_label
+            // 
+            this.psnr_param_label.AutoSize = true;
+            this.psnr_param_label.Location = new System.Drawing.Point(146, 16);
+            this.psnr_param_label.Name = "psnr_param_label";
+            this.psnr_param_label.Size = new System.Drawing.Size(37, 13);
+            this.psnr_param_label.TabIndex = 14;
+            this.psnr_param_label.Text = "PSNR";
+            // 
+            // mse_param_label
+            // 
+            this.mse_param_label.AutoSize = true;
+            this.mse_param_label.Location = new System.Drawing.Point(68, 16);
+            this.mse_param_label.Name = "mse_param_label";
+            this.mse_param_label.Size = new System.Drawing.Size(30, 13);
+            this.mse_param_label.TabIndex = 13;
+            this.mse_param_label.Text = "MSE";
+            // 
+            // g_param_label
+            // 
+            this.g_param_label.AutoSize = true;
+            this.g_param_label.Location = new System.Drawing.Point(16, 127);
+            this.g_param_label.Name = "g_param_label";
+            this.g_param_label.Size = new System.Drawing.Size(18, 13);
+            this.g_param_label.TabIndex = 12;
+            this.g_param_label.Text = "G ";
+            // 
+            // g_mse_value
+            // 
+            this.g_mse_value.Location = new System.Drawing.Point(58, 127);
+            this.g_mse_value.Name = "g_mse_value";
+            this.g_mse_value.ReadOnly = true;
+            this.g_mse_value.Size = new System.Drawing.Size(60, 20);
+            this.g_mse_value.TabIndex = 11;
+            this.g_mse_value.Tag = "";
+            // 
+            // b_param_label
+            // 
+            this.b_param_label.AutoSize = true;
+            this.b_param_label.Location = new System.Drawing.Point(16, 84);
+            this.b_param_label.Name = "b_param_label";
+            this.b_param_label.Size = new System.Drawing.Size(17, 13);
+            this.b_param_label.TabIndex = 10;
+            this.b_param_label.Text = "B ";
+            // 
+            // b_mse_value
+            // 
+            this.b_mse_value.Location = new System.Drawing.Point(58, 84);
+            this.b_mse_value.Name = "b_mse_value";
+            this.b_mse_value.ReadOnly = true;
+            this.b_mse_value.Size = new System.Drawing.Size(60, 20);
+            this.b_mse_value.TabIndex = 9;
+            this.b_mse_value.Tag = "";
+            // 
+            // r_param_label
+            // 
+            this.r_param_label.AutoSize = true;
+            this.r_param_label.Location = new System.Drawing.Point(16, 38);
+            this.r_param_label.Name = "r_param_label";
+            this.r_param_label.Size = new System.Drawing.Size(18, 13);
+            this.r_param_label.TabIndex = 8;
+            this.r_param_label.Text = "R ";
+            // 
+            // r_mse_value
+            // 
+            this.r_mse_value.Location = new System.Drawing.Point(58, 38);
+            this.r_mse_value.Name = "r_mse_value";
+            this.r_mse_value.ReadOnly = true;
+            this.r_mse_value.Size = new System.Drawing.Size(60, 20);
+            this.r_mse_value.TabIndex = 7;
+            this.r_mse_value.Tag = "";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.YrateBox);
+            this.groupBox1.Controls.Add(this.CrRateBox);
+            this.groupBox1.Controls.Add(this.resetButton);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.CbRateBox);
+            this.groupBox1.Location = new System.Drawing.Point(455, 55);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(84, 172);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "color rate";
+            this.groupBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.groupBox1_Enter);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(25, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Y %";
+            // 
+            // YrateBox
+            // 
+            this.YrateBox.Location = new System.Drawing.Point(45, 24);
+            this.YrateBox.Name = "YrateBox";
+            this.YrateBox.Size = new System.Drawing.Size(26, 20);
+            this.YrateBox.TabIndex = 5;
+            this.YrateBox.Tag = "";
+            this.YrateBox.Text = "100";
+            // 
+            // CrRateBox
+            // 
+            this.CrRateBox.Location = new System.Drawing.Point(45, 72);
+            this.CrRateBox.Name = "CrRateBox";
+            this.CrRateBox.Size = new System.Drawing.Size(26, 20);
+            this.CrRateBox.TabIndex = 7;
+            this.CrRateBox.Text = "100";
+            // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(16, 146);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(55, 23);
+            this.resetButton.TabIndex = 11;
+            this.resetButton.Text = "reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(28, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Cr %";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 123);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(31, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Cb %";
+            // 
+            // CbRateBox
+            // 
+            this.CbRateBox.Location = new System.Drawing.Point(45, 120);
+            this.CbRateBox.Name = "CbRateBox";
+            this.CbRateBox.Size = new System.Drawing.Size(26, 20);
+            this.CbRateBox.TabIndex = 9;
+            this.CbRateBox.Text = "100";
+            // 
+            // changeGroupButton
+            // 
+            this.changeGroupButton.Location = new System.Drawing.Point(436, 230);
+            this.changeGroupButton.Name = "changeGroupButton";
+            this.changeGroupButton.Size = new System.Drawing.Size(38, 23);
+            this.changeGroupButton.TabIndex = 20;
+            this.changeGroupButton.Text = "<-->";
+            this.changeGroupButton.UseVisualStyleBackColor = true;
+            this.changeGroupButton.Click += new System.EventHandler(this.changeGroup_Click);
             // 
             // View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 372);
-            this.Controls.Add(this.colorParamsBox);
+            this.ClientSize = new System.Drawing.Size(997, 520);
+            this.Controls.Add(this.changeGroupButton);
+            this.Controls.Add(this.resultParamsBox);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.oldImage1);
             this.Controls.Add(this.sizeElementBox);
             this.Controls.Add(this.selectedMethodBox);
             this.Controls.Add(this.sourceImage);
@@ -254,6 +590,8 @@
             this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.selectImage);
             this.Controls.Add(this.resultImage);
+            this.Controls.Add(this.colorParamsBox);
+            this.Controls.Add(this.groupBox1);
             this.Name = "View";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.sourceImage)).EndInit();
@@ -262,6 +600,12 @@
             this.sizeElementBox.PerformLayout();
             this.colorParamsBox.ResumeLayout(false);
             this.colorParamsBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.oldImage1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.resultParamsBox.ResumeLayout(false);
+            this.resultParamsBox.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -290,6 +634,35 @@
         private System.Windows.Forms.RadioButton radioButton_16;
         private System.Windows.Forms.RadioButton radioButton_32;
         private System.Windows.Forms.GroupBox colorParamsBox;
+        private System.Windows.Forms.PictureBox oldImage1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.GroupBox resultParamsBox;
+        private System.Windows.Forms.Label mse_param_label;
+        private System.Windows.Forms.Label g_param_label;
+        private System.Windows.Forms.TextBox g_mse_value;
+        private System.Windows.Forms.Label b_param_label;
+        private System.Windows.Forms.TextBox b_mse_value;
+        private System.Windows.Forms.Label r_param_label;
+        private System.Windows.Forms.TextBox r_mse_value;
+        private System.Windows.Forms.TextBox g_psnr_value;
+        private System.Windows.Forms.TextBox b_psnr_value;
+        private System.Windows.Forms.TextBox r_psnr_value;
+        private System.Windows.Forms.Label psnr_param_label;
+        private System.Windows.Forms.Label g_psnr_delta;
+        private System.Windows.Forms.Label b_psnr_delta;
+        private System.Windows.Forms.Label r_psnr_delta;
+        private System.Windows.Forms.Label g_mse_delta;
+        private System.Windows.Forms.Label b_mse_delta;
+        private System.Windows.Forms.Label r_mse_delta;
+        private System.Windows.Forms.CheckBox psnrMseApply;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox YrateBox;
+        private System.Windows.Forms.TextBox CrRateBox;
+        private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox CbRateBox;
+        private System.Windows.Forms.Button changeGroupButton;
     }
 }
-

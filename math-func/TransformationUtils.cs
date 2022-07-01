@@ -3,12 +3,15 @@ using System.Threading.Tasks;
 
 namespace MathFunction {
     public static class TransformationUtils {
-
         public static double[,] get2DCoeffs(double[,] funcValues, FourierTransformation transformation) {
+            if(transformation is FourierTransformation2D) {
+                return ((FourierTransformation2D) transformation).doAnalysis(funcValues);
+            }
+            // other cases
             var rows = funcValues.GetLength(0);
             var cols = funcValues.GetLength(1);
             var coeffs2d = new double[rows, cols];
-            // 1st step: applying Walsh to rows
+            // 1st step: applying transformation to rows
             Parallel.For(0, rows, i => {
                 var row = new double[cols];
                 for(int j = 0; j < cols; j++) {
@@ -19,7 +22,7 @@ namespace MathFunction {
                     coeffs2d[i, j] = coeffs[j];
                 }
             });
-            // 2nd step: applying Walsh to cols
+            // 2nd step: applying transformation to cols
             Parallel.For(0, cols, j => {
                 var col = new double[rows];
                 for(int i = 0; i < rows; i++) {
@@ -32,8 +35,11 @@ namespace MathFunction {
             });
             return coeffs2d;
         }
-
         public static double[,] get2DValues(double[,] coeffs, FourierTransformation transformation) {
+            if(transformation is FourierTransformation2D) {
+                return ( (FourierTransformation2D) transformation ).doSynthesis(coeffs);
+            }
+            // other cases
             var rows = coeffs.GetLength(0);
             var cols = coeffs.GetLength(1);
             var values2d = new double[rows, cols];
@@ -61,6 +67,5 @@ namespace MathFunction {
             }
             return values2d;
         }
-
     }
 }
